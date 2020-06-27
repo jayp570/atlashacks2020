@@ -71,7 +71,7 @@ const getChannelLinks = function(channelURL) {
             });
         };
 
-        request.open("GET", `/api/yt-passthrough?url=${encodeURIComponent(channelURL)}`);
+        request.open("GET", `/api/cors-passthrough?url=${encodeURIComponent(channelURL)}`);
         request.send();
 
     });
@@ -133,7 +133,7 @@ const getVideosInPlaylist = function(playlistID, nextPageKey) {
             });
         };
 
-        request.open("GET", `https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=10&playlistId=${playlistID}&key=${GOOGLE_API_KEY}${nextPageKey !== undefined ? "&pageToken=" + nextPageKey : ""}`);
+        request.open("GET", `https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=&playlistId=${playlistID}&key=${GOOGLE_API_KEY}${nextPageKey !== undefined ? "&pageToken=" + nextPageKey : ""}`);
         request.send();
 
     });    

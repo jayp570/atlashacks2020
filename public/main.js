@@ -122,7 +122,7 @@ const show = function() {
 };
 
 window.addEventListener("scroll", () => {
-    if(bottom.offsetTop - window.scrollY < 1200) {
+    if(bottom.offsetTop - window.scrollY < 1100) {
         show();
     }
 });
