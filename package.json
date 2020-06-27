@@ -1,0 +1,19 @@
+{
+  "name": "atlashacks2020",
+  "version": "1.0.0",
+  "description": "AtlasHacks 2020 project!",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jayp-png/atlashacks2020.git"
+  },
+  "author": "Adrian Zhang, Jayant Patil, Akarsh Ojha, Adrian Chu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jayp-png/atlashacks2020/issues"
+  },
+  "homepage": "https://github.com/jayp-png/atlashacks2020#readme"
+}
