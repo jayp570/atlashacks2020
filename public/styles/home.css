@@ -116,16 +116,6 @@ table {
     border: #111 solid 2px;
 }
 
-<<<<<<< HEAD
-@keyframes smalltobig{
-    from {
-        width: 88px; height: 88px;
-    }
-    to{
-        width: 120px; height: 120px;
-    }
-}
-=======
 input[type='checkbox'] {
     float: left;
     width: 20px;
@@ -135,7 +125,6 @@ input[type='checkbox'] {
     width: 200px;
   }
 
->>>>>>> b21da84eae294e80e24742e9fa45682479234fb5
 
 @keyframes bigtosmall{
     from {
