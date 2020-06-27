@@ -2,7 +2,6 @@ const searchForChannel = function(channelName) {
     
     return new Promise((resolve, reject) => {
 
-
         let request = new XMLHttpRequest();
         
         request.onload = () => {
@@ -16,7 +15,7 @@ const searchForChannel = function(channelName) {
             }
         };
 
-        request.onError = () => {
+        request.onerror = () => {
             reject({
                 status: request.status,
                 statusText: request.statusText
@@ -27,5 +26,13 @@ const searchForChannel = function(channelName) {
         request.send();
     
     });
+
+};
+
+const getChannelLinks = function(channelURL) {
+
+    let request = new XMLHttpRequest();
+    request.open("GET", `/api/yt-passthrough?url=${encodeURIComponent(channelURL)}`);
+    request.send();
 
 };
