@@ -115,4 +115,20 @@ table {
     border: #111 solid 2px;
 }
 
+@keyframes smalltobig{
+    from {
+        width: 88px; height: 88px;
+    }
+    to{
+        width: 120px; height: 120px;
+    }
+}
 
+@keyframes bigtosmall{
+    from {
+        width: 120px; height: 120px;
+    }
+    to{
+        width: 88px; height: 88px;
+    }
+}

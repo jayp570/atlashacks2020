@@ -33,7 +33,23 @@ const go = function() {
 
                     let channelThumbnailElem = document.createElement("img");
                     channelThumbnailElem.src = item.snippet.thumbnails.default.url;
+                    channelThumbnailElem.setAttribute("position","relative");
+
+                    channelThumbnailElem.onmouseover = function(){
+                        channelThumbnailElem.style.animationName = "smalltobig";
+                        console.log("dick");
+                    };
+                    
+                    channelThumbnailElem.onmouseout = function(){
+                        channelThumbnailElem.style.animationName = "bigtosmall";
+                    };
+                    
                     subDiv.appendChild(channelThumbnailElem);
+
+                    channelThumbnailElem.onclick = function(){
+                        console.log(item.snippet.channelTitle);
+                    }; 
+                     
 
 
                 }
