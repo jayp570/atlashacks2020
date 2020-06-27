@@ -5,7 +5,9 @@ body {
 
 h1 {
     text-align: center;
+    margin: 0;
 }
+
 
 .feed {
     margin-left: auto;
@@ -60,6 +62,7 @@ h1 {
     border: black solid 1px;
     border-radius: 10px 10px;
     box-shadow: 3px 10px 10px gray;
+    margin-bottom: 20px;
 }
 
 input {
