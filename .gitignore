@@ -1,2 +1,3 @@
 # node_modules probably doesn't need committing...
 node_modules/
+auth.js
