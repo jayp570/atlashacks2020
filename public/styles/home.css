@@ -12,10 +12,18 @@ h1 {
     width: 35%;
 }
 
-.sidebar {
+.feedFilter {
     border-style: solid;
     border-width: 1px;
     margin-left: auto;
+    width: 15%;
+    padding: 20px;
+}
+
+.addCreator {
+    border-style: solid;
+    border-width: 1px;
+    margin-right: auto;
     width: 15%;
     padding: 20px;
 }
