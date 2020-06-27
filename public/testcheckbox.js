@@ -1,17 +1,15 @@
-let string1 = "markipliers";
-let string2 = "jack";
-let string3 = "pewdie"
+
 let youtubers = [
     {
-        name: string1,
+        name: "markipliers",
         state: false
     },
     {
-        name: string2,
+        name: "jack",
         state: false
     },
     {
-        name: string3,
+        name: "pewdie",
         state: false
     }
 ]
