@@ -22,5 +22,5 @@ h1 {
 
 .csscard{
     border-radius: 10px 10px;
-    box-shadow: 2px 10px black;
+    box-shadow: black 10px 10px 10px 10px;
 }
