@@ -30,7 +30,7 @@ h1 {
 .feedFilter {
     font-size: 20px;
     height: 100%; /* Full-height: remove this if you want "auto" height */
-    width: 200px; /* Set the width of the sidebar */
+    width: 250px; /* Set the width of the sidebar */
     position: fixed; /* Fixed Sidebar (stay in place on scroll) */
     z-index: 1; /* Stay on top */
     top: 0; /* Stay at the top */
@@ -42,7 +42,7 @@ h1 {
 
 .addCreator {
     height: 100%; /* Full-height: remove this if you want "auto" height */
-    width: 200px; /* Set the width of the sidebar */
+    width: 250px; /* Set the width of the sidebar */
     position: fixed; /* Fixed Sidebar (stay in place on scroll) */
     z-index: 1; /* Stay on top */
     top: 0; /* Stay at the top */
@@ -60,4 +60,23 @@ h1 {
     border: black solid 1px;
     border-radius: 10px 10px;
     box-shadow: 3px 10px 10px gray;
+}
+
+input {
+    padding: 10px;
+}
+
+button {
+    background-color: #111;
+    color: white;
+    transition-duration: 0.3s; 
+    font-weight: bold;
+    padding: 10px;
+    border: 0px;
+    outline: none;
+}
+
+button:hover {
+    background-color: white;
+    color: #111;
 }
