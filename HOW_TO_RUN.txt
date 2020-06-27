@@ -1,0 +1,4 @@
+1. Make sure your node_modules is up to date by running
+    npm update
+2. Run `node main.js`
+3. The contents of public/ are now accessible under `localhost`.
