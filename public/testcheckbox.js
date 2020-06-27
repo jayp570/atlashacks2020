@@ -1,8 +1,11 @@
-let string1 = "A";
-let string2 = "B";
-let string3 = "C";
+let string1 = "markipliers";
+let string2 = "jackjsepticyes";
+let string3 = "desinkular";
+let string4 = "hitler";
+let string5 = "jackjsepticyes";
+let string6 = "dinosaur";
 
-let ytbers = [string1, string2, string3];
+let ytbers = [string1, string2, string3, string4, string5, string6];
 
 console.log(ytbers);
 for(let item of ytbers){

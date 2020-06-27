@@ -124,13 +124,3 @@ input[type='checkbox'] {
     display: block;
     width: 200px;
   }
-
-
-@keyframes bigtosmall{
-    from {
-        width: 120px; height: 120px;
-    }
-    to{
-        width: 88px; height: 88px;
-    }
-}
