@@ -1,0 +1,9 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.feed {
+    margin-left: auto;
+    margin-right: auto;
+    width: 35%;
+}
