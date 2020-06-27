@@ -1,6 +1,9 @@
 let searchResultElems = [];
 
-const go = function() {
+let shownVideoElements = [];
+let nextYTPageKey;
+
+const fillSearch = function() {
 
     let channelName = document.getElementById("field-channelName").value;
 
