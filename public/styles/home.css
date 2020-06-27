@@ -18,6 +18,7 @@ h1 {
     margin-left: auto;
     width: 15%;
     padding: 20px;
+    display: inline;
 }
 
 .addCreator {
@@ -26,6 +27,7 @@ h1 {
     margin-right: auto;
     width: 15%;
     padding: 20px;
+    display: inline;
 }
 
 .csscard{
