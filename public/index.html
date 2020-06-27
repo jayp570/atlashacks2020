@@ -8,6 +8,9 @@
     <title>Markipler App</title>
 </head>
 <body>
+    <script src="yt.js"></script>
+    <script src="auth.js"></script>
+    <script src="main.js"></script>
     <h1>Markiplier App</h1>
     <div class="feed">
 
@@ -34,19 +37,20 @@
     <div class="sidebar">
 
         <div class="feedFilter">
-            <input type="checkbox"> this is  astest <br>
-            <input type="checkbox"> thsisi is a test
+            <input type="checkbox" checked> this is  astest <br>
+            <input type="checkbox" checked> thsisi is a test
         </div>
         <br>
         <div class="addCreator">
-            please add creator markiplier please
+            <input type="text" id="field-channelName" placeholder="Search for Youtube Channel"> <button onclick="go()">Go</button>
+            <p id="searchGlobalText"></p>
+            <div id="searchResults"></div>
         </div>
     </div>
 
-    
 
     <div class="csscard">
-        <iframe id="embed" src="https://en.wikipedia.org/wiki/Gilbert_Gottfried" title="Markipler" width="800" height="600"></iframe>
+        <iframe id="embed" src="https://www.youtube.com/embed/twBsTskaCWM" title="Markipler" width="960" height="540"></iframe>
     </div>
 
     
