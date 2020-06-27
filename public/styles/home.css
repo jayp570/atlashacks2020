@@ -21,6 +21,11 @@ h1 {
 }
 
 .csscard{
+    width: 50.5%;
+    height: fit-content;
+    margin: 0 auto;
+    padding: 12px;
+    border: black solid 1px;
     border-radius: 10px 10px;
-    box-shadow: black 10px 10px 10px 10px;
+    box-shadow: 3px 10px 10px gray;
 }
