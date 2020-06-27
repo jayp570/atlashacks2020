@@ -88,7 +88,7 @@ input {
 button {
     background-color: #111;
     color: white;
-    /* transition-duration: 0.3s;  */
+    transition-duration: 0.3s; 
     font-weight: bold;
     padding: 10px;
     border: 0px;
@@ -99,10 +99,10 @@ button {
     display: block;
 }
 
-/* button:hover {
+button:hover {
     background-color: white;
     color: #111;
-} */
+}
 
 .searchResult {
     background-color: white;
@@ -133,4 +133,12 @@ input[type='checkbox'] {
     to{
         width: 88px; height: 88px;
     }
+}
+
+.about {
+    font-size: 14px;
+    padding: 20px;
+    color: white;
+    background-color: #111;
+    margin-top: 40px;
 }
