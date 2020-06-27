@@ -4,6 +4,7 @@ let shownVideoElements = [];
 let nextYTPageKey;
 
 const feedArea = document.getElementById("feed");
+const bottom = document.getElementById("bottom");
 
 const fillSearch = function() {
 
@@ -73,6 +74,7 @@ const fillSearch = function() {
 
 const show = function() {
 
+    /*
     try {
         getVideosPlaylist(MARKIPLIER_ID).then((playlists) => {
             playlists = JSON.parse(playlists);
@@ -102,5 +104,25 @@ const show = function() {
     } catch(error) {
         console.log("Problems showing more videos: ", error);
     }
+    */
+
+    for(let i = 0; i < 5; i++) {
+        let cardElem = document.createElement("div");
+        cardElem.classList.add("csscard");
+        
+        let embeddedVideo = document.createElement("iframe");
+        embeddedVideo.src = `https://www.youtube.com/embed/oHg5SJYRHA0`;
+        embeddedVideo.width = 960;
+        embeddedVideo.height = 540;
+
+        cardElem.appendChild(embeddedVideo);
+        feedArea.appendChild(cardElem); 
+    }
 
 };
+
+window.addEventListener("scroll", () => {
+    if(bottom.offsetTop - window.scrollY < 1200) {
+        show();
+    }
+});
