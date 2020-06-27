@@ -31,8 +31,49 @@ const searchForChannel = function(channelName) {
 
 const getChannelLinks = function(channelURL) {
 
-    let request = new XMLHttpRequest();
-    request.open("GET", `/api/yt-passthrough?url=${encodeURIComponent(channelURL)}`);
-    request.send();
+    return new Promise((resolve, reject) => {
+
+        let request = new XMLHttpRequest();
+        
+        request.onload = () => {
+            
+            if(request.status >= 200 && request.status < 300) {
+                
+                let parser = new DOMParser();
+                let doc = parser.parseFromString(request.response, "text/html");
+
+                //let elems = doc.querySelectorAll(".about-channel-link.yt-uix-redirect-link.about-channel-link-with-icon");
+                let elems = doc.querySelectorAll("a.about-channel-link");
+                let redirects = [...elems].map(elem => elem.href);
+
+                // Clever trick to parse URL easily
+                let links = redirects.map((redirect) => {
+                    return new URLSearchParams(redirect).get("q");
+                });
+
+                // Remove duplicates 
+                console.log([...new Set(links)]);
+                resolve([...new Set(links)]);
+
+            } else {
+                reject({
+                    status: request.status,
+                    statusText: request.statusText
+                });
+            }    
+
+        };
+
+        request.onerror = () => {
+            reject({
+                status: request.status,
+                statusText: request.statusText
+            });
+        };
+
+        request.open("GET", `/api/yt-passthrough?url=${encodeURIComponent(channelURL)}`);
+        request.send();
+
+    });
 
 };

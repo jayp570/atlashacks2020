@@ -23,7 +23,9 @@ app.get("/api/yt-passthrough", (request, response) => {
         let URL = request.query.url;
 
         requester(
-            {url: decodeURI(URL)},
+            {
+                url: decodeURI(URL)
+            },
             (error, response2, body) => {
                 if(error || response2.statusCode != 200) {
                     return response.status(500).json({type: "error", message: error.message});
