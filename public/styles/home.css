@@ -64,6 +64,7 @@ h1 {
     padding: 20px;
 }
 
+
 .csscard{
     width: fit-content;
     height: fit-content;
@@ -114,5 +115,14 @@ button {
 table {
     border: #111 solid 2px;
 }
+
+input[type='checkbox'] {
+    float: left;
+    width: 20px;
+  }
+  input[type='checkbox'] + label {
+    display: block;
+    width: 200px;
+  }
 
 

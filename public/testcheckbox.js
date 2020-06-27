@@ -32,16 +32,14 @@ function toggleButton(creator) {
 
 
 console.log(youtubers);
-let placeholder = document.getElementById("xyz");
+let placeholder = document.getElementById("feedFilter");
 for(let item of youtubers){
     let temp = document.createElement("div");
+    temp.className = "checklist"
     let html = `
-    <table style="width:100%">
-        <tr>
-            <th><input type="checkbox" checked></th>
-            <th>${item.name}</th>
-        </tr>
-    </table>
+    <label>
+        <input type="checkbox" checked>${item.name}
+    </label>
 
     `
     temp.innerHTML = html;
