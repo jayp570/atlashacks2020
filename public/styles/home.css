@@ -111,4 +111,8 @@ button {
     margin-bottom: 10px;
 }
 
+table {
+    border: #111 solid 2px;
+}
+
 

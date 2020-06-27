@@ -1,6 +1,6 @@
-let string1 = "A";
-let string2 = "B";
-let string3 = "C"
+let string1 = "markipliers";
+let string2 = "jack";
+let string3 = "pewdie"
 let youtubers = [
     {
         name: string1,
@@ -36,7 +36,12 @@ let placeholder = document.getElementById("xyz");
 for(let item of youtubers){
     let temp = document.createElement("div");
     let html = `
-    <button onclick="toggleButton('${item.name}')" class="filterButton" id="${item.name}Button">${item.name}</button>
+    <table style="width:100%">
+        <tr>
+            <th><input type="checkbox" checked></th>
+            <th>${item.name}</th>
+        </tr>
+    </table>
 
     `
     temp.innerHTML = html;
