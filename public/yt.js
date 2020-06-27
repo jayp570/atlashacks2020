@@ -77,3 +77,75 @@ const getChannelLinks = function(channelURL) {
     });
 
 };
+
+const getVideosPlaylist = function(channelID) {
+
+    return new Promise((resolve, reject) => {
+
+        let request = new XMLHttpRequest();
+        
+        request.onload = () => {
+            if(request.status >= 200 && request.status < 300) {
+                resolve(request.response);
+            } else {
+                reject({
+                    status: request.status,
+                    statusText: request.statusText
+                });
+            }
+        };
+
+        request.onerror = () => {
+            reject({
+                status: request.status,
+                statusText: request.statusText
+            });
+        };
+
+        request.open("GET", `https://www.googleapis.com/youtube/v3/channels?part=contentDetails&id=${channelID}&key=${GOOGLE_API_KEY}`);
+        request.send();
+
+    });
+
+};
+
+const getVideosInPlaylist = function(playlistID, nextPageKey) {
+
+    return new Promise((resolve, reject) => {
+
+        let request = new XMLHttpRequest();
+        
+        request.onload = () => {
+            if(request.status >= 200 && request.status < 300) {
+                resolve(request.response);
+            } else {
+                reject({
+                    status: request.status,
+                    statusText: request.statusText
+                });
+            }
+        };
+
+        request.onerror = () => {
+            reject({
+                status: request.status,
+                statusText: request.statusText
+            });
+        };
+
+        request.open("GET", `https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=50&playlistId=${playlistID}&key=${GOOGLE_API_KEY}${nextPageKey !== undefined ? "&pageToken=" + nextPageKey : ""}`);
+        request.send();
+
+    });    
+
+};
+
+const show = function() {
+
+    try {
+        let playlists = JSON.parse(getVideosPlaylist());
+    } catch(error) {
+        console.log("Problems showing more videos: ", error);
+    }
+
+};
