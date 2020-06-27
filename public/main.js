@@ -20,13 +20,15 @@ const go = function() {
                 let searchResultsArea = document.getElementById("searchResults");
                 for(let item of response.items) {
                     
+                    console.log(item);
+
                     let subDiv = document.createElement("div");
                     subDiv.className = "searchResult";
                     searchResultsArea.appendChild(subDiv);
                     searchResultElems.push(subDiv);
 
                     let channelNameElem = document.createElement("p");
-                    channelNameElem.appendChild(document.createTextNode(item.snippet.channelTitle));
+                    channelNameElem.appendChild(document.createTextNode(`${item.snippet.channelTitle} (id ${item.id.channelId})`));
                     subDiv.appendChild(channelNameElem);
 
                     let channelThumbnailElem = document.createElement("img");
