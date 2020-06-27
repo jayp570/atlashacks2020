@@ -3,6 +3,8 @@ let searchResultElems = [];
 let shownVideoElements = [];
 let nextYTPageKey;
 
+const feedArea = document.getElementById("feed");
+
 const fillSearch = function() {
 
     let channelName = document.getElementById("field-channelName").value;
@@ -72,11 +74,31 @@ const fillSearch = function() {
 const show = function() {
 
     try {
-        let x = getVideosPlaylist(MARKIPLIER_ID);
-        let playlists = JSON.parse(x);
-        let y = getVideosInPlaylist(paylists.items.contentDetails.relatedPlaylist.uploads, nextYTPageKey);
-        let videoIDs = JSON.parse(y);
-        console.log(videoIDs);
+        getVideosPlaylist(MARKIPLIER_ID).then((playlists) => {
+            playlists = JSON.parse(playlists);
+            console.log(playlists);
+            getVideosInPlaylist(playlists.items[0].contentDetails.relatedPlaylists.uploads, nextYTPageKey).then((videos) => {
+                
+                videos = JSON.parse(videos);
+                nextYTPageKey = videos.nextPageToken;
+                
+                for(let video of videos.items) {
+                    
+                    let cardElem = document.createElement("div");
+                    cardElem.classList.add("csscard");
+                    
+                    let embeddedVideo = document.createElement("iframe");
+                    embeddedVideo.src = `https://www.youtube.com/embed/${video.contentDetails.videoId}`;
+                    embeddedVideo.width = 960;
+                    embeddedVideo.height = 540;
+
+                    cardElem.appendChild(embeddedVideo);
+                    feedArea.appendChild(cardElem);
+
+                }
+
+            });    
+        });
     } catch(error) {
         console.log("Problems showing more videos: ", error);
     }
