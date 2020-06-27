@@ -35,4 +35,5 @@ const go = function() {
 gapi.load("client:auth2", () => {
     gapi.auth2.init({client_id: GOOGLE_API_KEY});
 });
-loadClient();
+
+//loadClient();
