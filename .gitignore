@@ -1,2 +1,5 @@
 # Never commit auth.js since it contains private keys.
 auth.js
+
+# node_modules probably doesn't need committing...
+node_modules/
