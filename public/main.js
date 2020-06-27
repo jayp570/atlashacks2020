@@ -1,39 +1,31 @@
-const authenticate = function() {
-    return gapi.auth2.getAuthInstance()
-        .signIn({scope: "https://www.googleapis.com/auth/youtube.force-ssl"})
-        .then(
-            () => {console.log("Signed in")},
-            (error) => {console.log("Error signing in: ", error)}
-        );
-};
-
-const loadClient = function() {
-    gapi.client.setApiKey(GOOGLE_API_KEY);
-    return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
-        .then(
-            () => {console.log("GAPI client loaded for API")},
-            () => {console.log("Error loading GAPI client for API: ", error)}
-        );
-};
-
 const go = function() {
-    return gapi.client.youtube.search.list({
-        "part": [
-            "snippet",
-            "id"
-        ],
-        "q": document.getElementById("field-channelLink"),
-        "type": [
-            "channel"
-        ]
-    }).then((response) => {
-        console.log(response);
-    },
-    (error) => {console.log("Error executing the request: ", error)});
+
+    let channelName = document.getElementById("field-channelName").value;
+
+    searchForChannel(channelName).then(
+        (result) => {
+            try {
+                
+                let response = JSON.parse(result);
+                document.getElementById("searchGlobalText").innerHTML = `${response.pageInfo.totalResults} results for "${channelName}"`;
+                
+                let searchResultsArea = document.getElementById("searchResults");
+                for(let item of response.items) {
+                    
+                    let subDiv = document.createElement("div");
+                    searchResultsArea.appendChild(subDiv);
+
+                }
+
+                console.log(response);
+
+            } catch(error) {
+                console.log("Bad response from the server: ", error);
+            }
+        },
+        (error) => {
+            console.log("Error: ", error);
+        }
+    );
+
 };
-
-gapi.load("client:auth2", () => {
-    gapi.auth2.init({client_id: GOOGLE_API_KEY});
-});
-
-//loadClient();
