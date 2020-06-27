@@ -64,6 +64,11 @@ h1 {
 
 input {
     padding: 10px;
+    padding-left: 50px;
+    padding-right: 50px;
+    margin: auto;
+    display: block;
+    text-align: center;
 }
 
 button {
@@ -74,6 +79,10 @@ button {
     padding: 10px;
     border: 0px;
     outline: none;
+    padding-left: 128px;
+    padding-right: 128px;
+    margin: auto;
+    display: block;
 }
 
 button:hover {

@@ -8,9 +8,6 @@ for(let i = 0; i < arlen; i++ ){
     let placeholder = document.getElementById("xyz");
     let x = document.createElement("input");
     x.type = "checkbox";
-    x.name = "name";
-    x.value = "value";
-    x.id = "id";
     let label = document.createElement('label');
     label.htmlFor = "id"
     label.append(document.createTextNode(ytbers[i].toString()));
