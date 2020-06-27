@@ -139,13 +139,3 @@ const getVideosInPlaylist = function(playlistID, nextPageKey) {
     });    
 
 };
-
-const show = function() {
-
-    try {
-        let playlists = JSON.parse(getVideosPlaylist());
-    } catch(error) {
-        console.log("Problems showing more videos: ", error);
-    }
-
-};

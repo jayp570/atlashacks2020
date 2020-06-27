@@ -52,3 +52,17 @@ const fillSearch = function() {
     );
 
 };
+
+const show = function() {
+
+    try {
+        let x = getVideosPlaylist(MARKIPLIER_ID);
+        let playlists = JSON.parse(x);
+        let y = getVideosInPlaylist(paylists.items.contentDetails.relatedPlaylist.uploads, nextYTPageKey);
+        let videoIDs = JSON.parse(y);
+        console.log(videoIDs);
+    } catch(error) {
+        console.log("Problems showing more videos: ", error);
+    }
+
+};
