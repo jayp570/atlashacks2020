@@ -109,7 +109,7 @@ const getVideosPlaylist = function(channelID) {
 
 };
 
-const getVideosInPlaylist = function(playlistID, nextPageKey) {
+const getVideosInPlaylist = function(name) {
 
     return new Promise((resolve, reject) => {
 
@@ -133,7 +133,7 @@ const getVideosInPlaylist = function(playlistID, nextPageKey) {
             });
         };
 
-        request.open("GET", `https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=10&playlistId=${playlistID}&key=${GOOGLE_API_KEY}${nextPageKey !== undefined ? "&pageToken=" + nextPageKey : ""}`);
+        request.open("GET", `https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=${name}&count=20`);
         request.send();
 
     });    
