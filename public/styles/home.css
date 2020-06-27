@@ -25,7 +25,7 @@ h1 {
 
 .feedFilter {
     height: 100%; /* Full-height: remove this if you want "auto" height */
-    width: 250px; /* Set the width of the sidebar */
+    width: 300px; /* Set the width of the sidebar */
     position: fixed; /* Fixed Sidebar (stay in place on scroll) */
     z-index: 1; /* Stay on top */
     top: 0; /* Stay at the top */
@@ -37,7 +37,7 @@ h1 {
 
 .addCreator {
     height: 100%; /* Full-height: remove this if you want "auto" height */
-    width: 250px; /* Set the width of the sidebar */
+    width: 300px; /* Set the width of the sidebar */
     position: fixed; /* Fixed Sidebar (stay in place on scroll) */
     z-index: 1; /* Stay on top */
     top: 0; /* Stay at the top */
@@ -74,4 +74,12 @@ button {
 button:hover {
     background-color: white;
     color: #111;
+}
+
+.searchResult {
+    background-color: white;
+    padding: 5px;
+    padding-left: 20px;
+    border: #111 solid 2px;
+    margin-bottom: 10px;
 }

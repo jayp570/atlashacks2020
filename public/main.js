@@ -21,6 +21,7 @@ const go = function() {
                 for(let item of response.items) {
                     
                     let subDiv = document.createElement("div");
+                    subDiv.className = "searchResult";
                     searchResultsArea.appendChild(subDiv);
                     searchResultElems.push(subDiv);
 
@@ -31,6 +32,7 @@ const go = function() {
                     let channelThumbnailElem = document.createElement("img");
                     channelThumbnailElem.src = item.snippet.thumbnails.default.url;
                     subDiv.appendChild(channelThumbnailElem);
+
 
                 }
 
