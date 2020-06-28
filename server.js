@@ -68,7 +68,7 @@ app.get("/api/twitter", (request, response) => {
 
 app.get("/api/twitterembed", (request, response) => {
     try {
-        twitter.get("statuses/oembed", {url: `https://twitter.com/${request.query.name}/status/${request.query.id}`}, (error, tweet, response2) => {
+        twitter.get("statuses/oembed", {url: `https://twitter.com/${request.query.name}/status/${request.query.id}`, theme: "dark"}, (error, tweet, response2) => {
             if(!error) {
                 response.send(response2);
             } else {
