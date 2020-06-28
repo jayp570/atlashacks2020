@@ -24,8 +24,20 @@ function printchecklist(ytber_name, ytber_id){
         let brk = document.createElement("br");
         bigdiv.appendChild(brk);
     }else{
-        
+        showtoast();
     }
     
     
 }
+
+function showtoast() {
+    // Get the snackbar DIV
+    var t = document.getElementById("toast");
+  
+    // Add the "show" class to DIV
+    t.className = "show";
+  
+    // After 3 seconds, remove the show class from DIV
+    setTimeout(function(){ t.className = t.className.replace("show", ""); }, 3000);
+  }
+  
