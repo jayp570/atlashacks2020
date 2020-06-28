@@ -52,7 +52,7 @@ app.get("/api/cors-passthrough", (request, response) => {
     }
 });
 
-app.get("/api/test", (request, response) => {
+app.get("/api/twitter", (request, response) => {
     try {
         twitter.get("statuses/user_timeline", {screen_name: request.query.name}, (error, tweet, response2) => {
             if(!error) {
