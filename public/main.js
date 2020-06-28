@@ -43,17 +43,10 @@ const fillSearch = function() {
 
                     channelThumbnailElem.onclick = function(){
                         youtuber_name = JSON.parse(JSON.stringify(item.snippet.channelTitle));
+                        youtuber_id = JSON.parse(JSON.stringify(item.snippet.channelId));
                         console.log(youtuber_name);
-                        printchecklist(youtuber_name);
+                        printchecklist(youtuber_name, youtuber_id );
                     }; 
-                    
-                    
-                    
-
-
-                    
-                     
-                    
 
                 }
 
