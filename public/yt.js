@@ -135,7 +135,7 @@ const getVideosInPlaylist = function(playlistID, nextPageKey) {
             });
         };
 
-        request.open("GET", `https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=6&playlistId=${playlistID}&key=${GOOGLE_API_KEY}${nextPageKey !== undefined ? "&pageToken=" + nextPageKey : ""}`);
+        request.open("GET", `https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&part=snippet&maxResults=6&playlistId=${playlistID}&key=${GOOGLE_API_KEY}${nextPageKey !== undefined ? "&pageToken=" + nextPageKey : ""}`);
         request.send();
 
     });    
