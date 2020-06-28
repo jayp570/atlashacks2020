@@ -33,21 +33,17 @@ function printchecklist(ytber_name, ytber_id){
         bigdiv.appendChild(placeholder);
         let brk = document.createElement("br");
         bigdiv.appendChild(brk);
-        
-
-        ytbers.push(ytber_name)
-            if(x.checked == true){
-                checkbox_check = true;
-            }else{
-                checkbox_check = false; 
-            }
-            checkarray.push(checkbox_check);
-            checkbtn.onclick = function(){
-            
-            console.log(checkarray);
-            console.log(ytbers);
+        if(x.checked == true){
+            checkbox_check = true;
         }
-        
+        ytbers.push(ytber_name)
+        checkarray.push(checkbox_check);
+
+        checkbtn.onclick = function(){
+        console.log(checkarray);
+        console.log(ytbers);
+        }       
+    
         
         
     }else{
