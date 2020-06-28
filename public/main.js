@@ -1,10 +1,9 @@
 let searchResultElems = [];
-
 let shownVideoElements = [];
 let nextYTPageKey;
 const feedArea = document.getElementById("feed");
 const bottom = document.getElementById("bottom");
-let youtuber_name;
+let youtuber_name = "aaaaa";
 
 const fillSearch = function() {
 
@@ -43,10 +42,18 @@ const fillSearch = function() {
                     subDiv.appendChild(channelThumbnailElem);
 
                     channelThumbnailElem.onclick = function(){
-                        youtube_name = item.snippet.channelTitle;
+                        youtuber_name = JSON.parse(JSON.stringify(item.snippet.channelTitle));
+                        console.log(youtuber_name);
+                        printchecklist(youtuber_name);
                     }; 
-                     
+                    
+                    
+                    
 
+
+                    
+                     
+                    
 
                 }
 
@@ -59,8 +66,12 @@ const fillSearch = function() {
             console.log("Error: ", error);
         }
     );
+        
 
 };
+
+
+
 
 const show = function() {
 

@@ -133,4 +133,5 @@ input[type='checkbox'] {
     color: white;
     background-color: #111;
     margin-top: 40px;
+    border-radius: 15px;
 }

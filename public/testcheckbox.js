@@ -1,6 +1,7 @@
-let ytbers = [1,2,3,4];
-console.log(ytbers);
-for(let item of ytbers){
+let ytbers = [];
+
+function printchecklist(ytber_name){
+    ytbers.push(ytber_name)
     let bigdiv = document.getElementById("bigdiv");
     bigdiv.setAttribute("style","display: inline-block");
     let placeholder = document.createElement("div")
@@ -12,7 +13,7 @@ for(let item of ytbers){
     x.id =  "id";
     let label = document.createElement('label');
     label.htmlFor = "id";
-    label.append(document.createTextNode(item));
+    label.append(document.createTextNode(ytber_name));
     placeholder.appendChild(x);
     placeholder.appendChild(label);
     bigdiv.appendChild(placeholder);
