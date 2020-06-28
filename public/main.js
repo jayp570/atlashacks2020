@@ -43,17 +43,10 @@ const fillSearch = function() {
 
                     channelThumbnailElem.onclick = function(){
                         youtuber_name = JSON.parse(JSON.stringify(item.snippet.channelTitle));
+                        youtuber_id = JSON.parse(JSON.stringify(item.snippet.channelId));
                         console.log(youtuber_name);
-                        printchecklist(youtuber_name);
+                        printchecklist(youtuber_name, youtuber_id );
                     }; 
-                    
-                    
-                    
-
-
-                    
-                     
-                    
 
                 }
 
@@ -123,7 +116,18 @@ const show = function() {
 };
 
 window.addEventListener("scroll", () => {
+    let scrollButton = document.getElementById("scrollButton");
     if(bottom.offsetTop - window.scrollY < 1100) {
         show();
     }
+    if(document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        scrollButton.style.display = "block";
+    } else {
+        scrollButton.style.display = "none";
+    }
 });
+
+function scrollToTop() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }

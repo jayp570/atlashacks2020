@@ -1,7 +1,8 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f1f0f0;
+    background-color: #111;
     margin: 0;
+    color: white;
 }
 
 h1 {
@@ -25,14 +26,15 @@ h1 {
     position: sticky;
     top: 0;
     border-radius: 20px;
-    background-color: #ffffff;
+    background-color: black;
     margin-bottom: 20px;
     padding: 20px;
+    height: 50px;
 }
 
 
 .sidebar {
-    color: black;
+    color: white;
 }
 
 #xyz{
@@ -47,7 +49,7 @@ h1 {
     z-index: 1; /* Stay on top */
     top: 0; /* Stay at the top */
     left: 0;
-    background-color: #e6e6e6; /* Black */
+    background-color: #222; /* Black */
     overflow-x: hidden; /* Disable horizontal scroll */
     padding: 20px;
 }
@@ -59,7 +61,7 @@ h1 {
     z-index: 1; /* Stay on top */
     top: 0; /* Stay at the top */
     right: 0;
-    background-color: #e6e6e6; /* Black */
+    background-color: #222; /* Black */
     overflow-x: hidden; /* Disable horizontal scroll */
     padding: 20px;
 }
@@ -73,7 +75,7 @@ h1 {
     border-radius: 10px 10px;
     box-shadow: 3px 10px 10px gray;
     margin-bottom: 20px;
-    background-color: #111;
+    background-color: white;
 }
 
 input {
@@ -86,8 +88,8 @@ input {
 }
 
 button {
-    background-color: #111;
-    color: white;
+    background-color: white;
+    color: #111;
     transition-duration: 0.3s; 
     font-weight: bold;
     padding: 10px;
@@ -100,20 +102,20 @@ button {
 }
 
 button:hover {
-    background-color: white;
-    color: #111;
+    background-color: #111;
+    color: white;
 }
 
 .searchResult {
-    background-color: white;
+    background-color: #111;
     padding: 5px;
     padding-left: 20px;
-    border: #111 solid 2px;
+    border: white solid 2px;
     margin-bottom: 10px;
 }
 
 table {
-    border: #111 solid 2px;
+    border: white solid 2px;
 }
 
 input[type='checkbox'] {
@@ -130,10 +132,31 @@ input[type='checkbox'] {
 .about {
     font-size: 14px;
     padding: 20px;
-    color: white;
-    background-color: #111;
+    color: #111;
+    background-color: white;
     margin-top: 40px;
     width: 100%;
     display: block;
     margin-left: -20px;
 }
+
+.scrollButton {
+    position: sticky;
+    top: 90px;
+    display: none;
+}
+
+#toast {
+    visibility: hidden; 
+    min-width: 250px; 
+    margin-left: -125px; 
+    background-color: #333; 
+    color: #fff; 
+    text-align: center; 
+    border-radius: 2px; 
+    padding: 16px; 
+    position: fixed; 
+    z-index: 1; 
+    left: 50%; 
+    bottom: 30px; 
+  }
