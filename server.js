@@ -54,7 +54,7 @@ app.get("/api/cors-passthrough", (request, response) => {
 
 app.get("/api/twitter", (request, response) => {
     try {
-        twitter.get("statuses/user_timeline", {screen_name: request.query.name}, (error, tweet, response2) => {
+        twitter.get("statuses/user_timeline", request.query.max !== undefined ? {screen_name: request.query.name, max_id: request.query.max} : {screen_name: request.query.name}, (error, tweet, response2) => {
             if(!error) {
                 response.send(response2);
             } else {

@@ -1,24 +1,48 @@
-// Debug mode?
-let debugMode = true;
-
 // Metdata for each feed
-let feedsData = [];
+let feeds = [];
 
 // DOM elements for search pane
 // Destroyed every time a search occurs!
 let searchResultElems = [];
 
 // General feed elements
-let feedElements = [];
+let feedContent = [];
 
 // Info about YT loader state
 let nextYTPageKey;
-let isYTLoading = false;
+
+// Info about twitter state
+let twitterMaxID;
+
+// Is loading?
+let loading = false;
 
 // Constant HTML elements:
 const feedArea = document.getElementById("feed");
 const searchResultArea = document.getElementById("searchResults");
 const bottom = document.getElementById("bottom");                       // Used for infinite scroll detection
+
+// timestamp contents
+const SECONDS_PER_MINUTE = 60;
+const SECONDS_PER_HOUR = SECONDS_PER_MINUTE * 60;
+const SECONDS_PER_DAY = SECONDS_PER_HOUR * 24;
+const SECONDS_PER_MONTH = SECONDS_PER_DAY * 30.5;
+const SECONDS_PER_YEAR = SECONDS_PER_MONTH * 12;
+
+const monthToNum = {
+	"Jan": 0,
+	"Feb": 1,
+	"Mar": 2,
+	"Apr": 3,
+	"May": 4,
+	"Jun": 5,
+	"Jul": 6,
+	"Aug": 7,
+	"Sep": 8,
+	"Oct": 9,
+	"Nov": 10,
+	"Dec": 11
+};
 
 // Generate a clickable YT search result by youtuber
 const addYTSearchResult = function(item) {
@@ -46,7 +70,7 @@ const addYTSearchResult = function(item) {
         // Destroy parent after click
         subDiv.remove();
 
-        feedsData.push({
+        feeds.push({
             youtuberName: item.snippet.channelTitle,
             id: item.id.channelId
         });
@@ -91,180 +115,167 @@ const doYTSearch = function() {
 
 };
 
+// TODO:
+// Make sure all items in feedContent have consistent timestamp format so it can be sorted.
+// This means we will need functions to convert YT, Twitter timestamps, etc. to a single format.
 
-let feedContent = []
+// Convert YT date to timestamp
+const convertYTDate = function(date) {
+    return date.substring(0, 4) * SECONDS_PER_YEAR + 
+        (date.substring(5, 7) - 1) * SECONDS_PER_MONTH +
+        date.substring(8, 10) * SECONDS_PER_DAY + 
+        date.substring(11, 13) * SECONDS_PER_HOUR +
+        date.substring(14, 16) * SECONDS_PER_MINUTE +
+        date.substring(17, 19);
+};
 
-const getYoutubeContent = function() {
+// Convert twitter date to timestamp
+const convertTwitterDate = function(date) {
+    console.log(monthToNum[date.substring(4, 7)], date.substring(4, 7));
+    return date.substring(26, 30) * SECONDS_PER_YEAR + 
+        monthToNum[date.substring(4, 7)] * SECONDS_PER_MONTH +
+        date.substring(8, 10) * SECONDS_PER_DAY + 
+        date.substring(11, 13) * SECONDS_PER_HOUR +
+        date.substring(14, 16) * SECONDS_PER_MINUTE +
+        date.substring(17, 19);
+};
 
-    if(!isYTLoading) {
-        try {
-            getVideosPlaylist(MARKIPLIER_ID).then((playlists) => {
-                playlists = JSON.parse(playlists);
-                isYTLoading = true;
-                getVideosInPlaylist(playlists.items[0].contentDetails.relatedPlaylists.uploads, nextYTPageKey).then((videos) => {
-                    
-                    videos = JSON.parse(videos);
-                    nextYTPageKey = videos.nextPageToken;
-                    
-                    for(let video of videos.items) {
+const getNextReadyItemInFeed = function(index) {
+    for(let i = index; i < feedContent.length; i++) {
+        if(!feedContent[i].needsInsert)
+            return feedContent[i];
+    }
+};
 
-                        feedContent.push(
-                            {
-                                type: "youtube",
-                                content: video
-                            }
-                        )
-                        
-                        // let cardElem = document.createElement("div");
-                        // cardElem.classList.add("csscard");
-                        
-                        // let embeddedVideo = document.createElement("iframe");
-                        // embeddedVideo.src = `https://www.youtube.com/embed/${video.contentDetails.videoId}`;
-                        // embeddedVideo.width = 960;
-                        // embeddedVideo.height = 540;
+const updateFeedDOM = function() {
 
-                        // cardElem.appendChild(embeddedVideo);
-                        // feedArea.appendChild(cardElem);
-
-                    }
-
-                    isYTLoading = false;
-
-                });    
-            });
-        } catch(error) {
-            console.log("Problems showing more videos: ", error);
-        }
-    }    
-
-    // for(let i = 0; i < 5; i++) {
-    //     let cardElem = document.createElement("div");
-    //     cardElem.classList.add("csscard");
+    for(let i in feedContent) {
         
-    //     let embeddedVideo = document.createElement("iframe");
-    //     embeddedVideo.src = `https://www.youtube.com/embed/oHg5SJYRHA0`;
-    //     embeddedVideo.width = 960;
-    //     embeddedVideo.height = 540;
+        let item = feedContent[i];
+        if(item.needsInsert) {
 
-    //     cardElem.appendChild(embeddedVideo);
-    //     feedArea.appendChild(cardElem); 
-    // }
+            let nextElem = getNextReadyItemInFeed();
+            console.log(nextElem);
+
+            if(nextElem === undefined) {
+                feedArea.appendChild(item.DOMElement);
+            } else {
+                feedArea.insertBefore(item.DOMElement, nextElem);
+            }
+
+            item.needsInsert = false;
+        }
+
+    }
+
+}
+
+const insertIntoFeed = function(newItem) {
+
+    for(let i in feedContent) {
+        
+        let item = feedContent[i];
+        if(newItem.timestamp > item.timestamp) {
+
+            // Use splice to insert new item at i
+            feedContent.splice(i, 0, newItem);
+            return;
+
+        }
+
+    }
+
+    feedContent.push(newItem);
+
+}
+
+const addVideoToFeed = function(video) {
+
+    let cardElem = document.createElement("div");
+    cardElem.classList.add("csscard");
+                        
+    let embeddedVideo = document.createElement("iframe");
+    embeddedVideo.src = `https://www.youtube.com/embed/${video.contentDetails.videoId}`;
+    embeddedVideo.width = 960;
+    embeddedVideo.height = 540;
+
+    cardElem.appendChild(embeddedVideo);
+
+    insertIntoFeed({
+        type: "youtube",
+        video: video,
+        timestamp: convertYTDate(video.snippet.publishedAt),
+        DOMElement: cardElem,
+        needsInsert: true
+    });
 
 };
 
-const getTwitterContent = function() {
-    getTweets("markiplier").then((tweets) => {
-        for(let tweet of tweets) {
-            feedContent.push(
-                {
-                    tpye: "twitter",
-                    content: tweet
-                }
-            )
-        }
-        // setTimeout(function() {}, 800);
-        // twttr.widgets.load();
-    });
-}
+const getYoutubeContent = async function() {
 
-function showFeed() {
-    for(let content of feedContent) {
-        if(content.type == "youtube") {
-
-            let cardElem = document.createElement("div");
-            cardElem.classList.add("csscard");
+    try {
             
-            let embeddedVideo = document.createElement("iframe");
-            embeddedVideo.src = `https://www.youtube.com/embed/${video.contentDetails.videoId}`;
-            embeddedVideo.width = 960;
-            embeddedVideo.height = 540;
+        let playlists = await getVideosPlaylist(MARKIPLIER_ID);
 
-            cardElem.appendChild(embeddedVideo);
-            feedArea.appendChild(cardElem);
-
-        } else if(content.type == "twitter") {
-
-            let html = embedTweet(tweet);
-            feedArea.innerHTML += html;
-
+        // Mark as loading to avoid loading extra posts while waiting for an initial request
+        playlists = JSON.parse(playlists);
+        isYTLoading = true;
+                
+        // Request videos in playlist
+        let videos = await getVideosInPlaylist(playlists.items[0].contentDetails.relatedPlaylists.uploads, nextYTPageKey);
+                    
+        // Self-parse
+        videos = JSON.parse(videos);
+        nextYTPageKey = videos.nextPageToken;
+                    
+        for(let video of videos.items) {
+            addVideoToFeed(video);
         }
-    } 
-    setTimeout(function() {}, 800);
-    twttr.widgets.load();
-}
 
+    } catch(error) {
+        console.log("Problems showing more videos: ", error);
+    }   
 
+};
 
-function getDate(content) {
-    if(content.type == "twitter") {
-        let tweet = JSON.parse(JSON.stringify(content))
-        let date = tweet.created_at;
-        let month = date.substring(4,7);
-        let day = parseInt(date.substring(8,10))
-        let year = parseInt(date.substring(26,date.length))
-        let hour = parseInt(date.substring(11,13));
-        let minute = parseInt(date.substring(14,16));
-        //console.log(month+" "+day+" "+year+" "+hour+":"+minute);
-        let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-        for(let i = 0; i < months.length; i++) {
-            if(month == months[i]) {
-                month = i+1;
-                break;
-            }
-        }
-        //console.log(month+" "+day+" "+year+" "+hour+":"+minute);
-        hour*=60;
-        day*=1440;
-        month*=43800;
-        year*=525600;
-        //console.log(month+" "+day+" "+year+" "+hour+":"+minute);
-        return month+day+year+hour+minute;
-    } else if(content.type == "youtube") {
-        let video = JSON.parse(JSON.stringify(content)) 
-        let date = video.contentDetails.videoPublishedAt;
-        let year = parseInt(date.substring(0,4))
-        let month = parseInt(date.substring(5,7))
-        let day = parseInt(date.substring(8,10))
-        let hour = parseInt(date.substring(11,13))
-        let minute = parseInt(date.subtring(14,16))
-        hour*=60;
-        day*=1440;
-        month*=43800;
-        year*=525600;
-        return month+day+year+hour+minute;
-    }
-}
+const getTwitterContent = async function() {
 
-function sortTweets(tweets) {
-    let list = JSON.parse(JSON.stringify(tweets))
-    for(let i = 0; i < list.length-1; i++) {
-        for(let j = 0; j < list.length-i-1; j++) {
-            if(getDate(list[j]) < getDate(list[j+1])) {
-                let temp1 = list[j];
-                let temp2 = list[j+1];
-                list[j] = temp2;
-                list[j+1] = temp1;
-            }
-        }
-    }
-    return list;
-}
-
-getTweets("markiplier").then((tweets) => {
+    let tweets = await getTweets("markiplier", twitterMaxID);
     for(let tweet of tweets) {
-        let html = embedTweet(tweet);
-        document.getElementById("testTweet").innerHTML += html;
+
+        let elem = document.createElement("div");
+        elem.innerHTML = embedTweet(tweet);
+
+        twttr.widgets.load(elem);
+
+        insertIntoFeed({
+            type: "twitter",
+            tweet: tweet,
+            timestamp: convertTwitterDate(tweet.created_at),
+            DOMElement: elem,
+            needsInsert: true
+        });
+
     }
-    
-});
 
+    twitterMaxID = tweets[tweets.length - 1].id;
 
+};
 
+const updateFeed = async function() {
+    if(!loading) {
+        await getYoutubeContent();
+        await getTwitterContent();
+        updateFeedDOM();
+        loading = false;
+    }
+};
 
+// Scroll features
 window.addEventListener("scroll", () => {
     let scrollButton = document.getElementById("scrollButton");
     if(bottom.offsetTop - window.scrollY < 1100) {
-        show();
+        updateFeed();
     }
     if(document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
         scrollButton.style.display = "block";
@@ -277,3 +288,5 @@ function scrollToTop() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
 }
+
+updateFeed();
