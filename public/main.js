@@ -139,5 +139,6 @@ getTweets("aragusea").then((tweets) => {
     embedTweet(tweets[0]).then((html) => {
         console.log(html);
         document.getElementById("testTweet").innerHTML = html;
+        twttr.widgets.load();
     });
 });
