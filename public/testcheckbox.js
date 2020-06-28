@@ -1,5 +1,8 @@
 let ytbers = [];
 let ytber_id_list = [];
+let passed_array = [];
+let checkbox_check;
+let submitbutton = document.getElementById("submitbtn");
 
 function printchecklist(ytber_name, ytber_id){
     
@@ -23,9 +26,26 @@ function printchecklist(ytber_name, ytber_id){
         bigdiv.appendChild(placeholder);
         let brk = document.createElement("br");
         bigdiv.appendChild(brk);
+        
+        x.onchange = function(){
+
+            if(x.checked == "true"){
+                checkbox_check = true;
+            }else{
+                checkbox_check = false;
+            }
+
+            if(passed_array.includes())
+            passed_array.push([ytber_name, checkbox_check]);
+            console.log(passed_array);
+            
+        }
+        
     }else{
         showtoast();
     }
+
+
     
     
 }
@@ -41,3 +61,4 @@ function showtoast() {
     setTimeout(function(){ t.className = t.className.replace("show", ""); }, 3000);
   }
   
+
