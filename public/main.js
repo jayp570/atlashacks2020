@@ -64,7 +64,7 @@ const fillSearch = function() {
 };
 
 
-
+let feedContent = []
 
 const show = function() {
 
@@ -72,7 +72,6 @@ const show = function() {
     try {
         getVideosPlaylist(MARKIPLIER_ID).then((playlists) => {
             playlists = JSON.parse(playlists);
-            console.log(playlists);
             getVideosInPlaylist(playlists.items[0].contentDetails.relatedPlaylists.uploads, nextYTPageKey).then((videos) => {
                 
                 videos = JSON.parse(videos);
@@ -80,6 +79,8 @@ const show = function() {
                 
                 for(let video of videos.items) {
                     
+                    console.log(videos);
+
                     let cardElem = document.createElement("div");
                     cardElem.classList.add("csscard");
                     
