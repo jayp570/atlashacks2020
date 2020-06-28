@@ -131,3 +131,64 @@ function scrollToTop() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
 }
+
+function getDate(tweet) {
+    let date = tweet.created_at;
+    let month = date.substring(4,7);
+    let day = parseInt(date.substring(8,10))
+    let year = parseInt(date.substring(26,date.length))
+    let hour = parseInt(date.substring(11,13));
+    let minute = parseInt(date.substring(14,16));
+    //console.log(month+" "+day+" "+year+" "+hour+":"+minute);
+    let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    for(let i = 0; i < months.length; i++) {
+        if(month == months[i]) {
+            month = i+1;
+            break;
+        }
+    }
+    //console.log(month+" "+day+" "+year+" "+hour+":"+minute);
+    hour*=60;
+    day*=1440;
+    month*=43800;
+    year*=525600;
+    //console.log(month+" "+day+" "+year+" "+hour+":"+minute);
+    return month+day+year+hour+minute;
+}
+
+function sortTweets(tweets) {
+    let list = JSON.parse(JSON.stringify(tweets))
+    for(let i = 0; i < list.length-1; i++) {
+        for(let j = 0; j < list.length-i-1; j++) {
+            if(getDate(list[j]) < getDate(list[j+1])) {
+                let temp1 = list[j];
+                let temp2 = list[j+1];
+                list[j] = temp2;
+                list[j+1] = temp1;
+            }
+        }
+    }
+    return list;
+}
+
+// getTweets("aragusea").then((tweets) => {
+//     for(let tweet of tweets) {
+//         embedTweet(tweet).then((html) => {
+//             console.log(html);
+//             document.getElementById("testTweet").innerHTML += html;
+//         });
+//     }
+//     setTimeout(function() {}, 800);
+//     twttr.widgets.load();
+// });
+
+let tweets = [];
+
+tweets.push({created_at: "Thu Apr 06 15:28:43 +0000 2017"});
+tweets.push({created_at: "Thu May 15 16:28:43 +0000 2019"});
+tweets.push({created_at: "Thu Jan 01 15:20:43 +0000 2015"});
+tweets.push({created_at: "Thu Aug 20 10:54:43 +0000 2016"});
+tweets.push({created_at: "Thu Dec 07 15:28:43 +0000 2017"});
+
+console.log(tweets);
+console.log(sortTweets(tweets));
