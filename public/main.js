@@ -140,7 +140,6 @@ getTweets("aragusea").then((tweets) => {
         embedTweet(tweet).then((html) => {
             console.log(html);
             document.getElementById("testTweet").innerHTML += html;
-            twttr.widgets.load();
         });
     }
 });
