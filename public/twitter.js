@@ -6,7 +6,7 @@ const getTweets = function(handle, after) {
         
         request.onload = () => {
             if(request.status >= 200 && request.status < 300) {
-                resolve(request.response);
+                resolve(JSON.parse(JSON.parse(request.response).body));
             } else {
                 reject({
                     status: request.status,
@@ -29,7 +29,7 @@ const getTweets = function(handle, after) {
 
 };
 
-const embedTweet = function(authorName, id) {
+const embedTweet = function(tweet) {
 
     return new Promise((resolve, reject) => {
 
@@ -37,7 +37,7 @@ const embedTweet = function(authorName, id) {
         
         request.onload = () => {
             if(request.status >= 200 && request.status < 300) {
-                resolve(request.response);
+                resolve(JSON.parse(JSON.parse(request.response).body).html);
             } else {
                 reject({
                     status: request.status,
@@ -53,7 +53,7 @@ const embedTweet = function(authorName, id) {
             });
         };
 
-        request.open("GET", `/api/twitter?name=${authorName}&id=${id}`);
+        request.open("GET", `/api/twitterembed?name=${tweet.user.screen_name}&id=${tweet.id_str}`);
         request.send();
 
     });
