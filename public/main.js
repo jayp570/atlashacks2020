@@ -1,58 +1,81 @@
+// Debug mode?
+let debugMode = true;
+
+// Metdata for each feed
+let feedsData = [];
+
+// DOM elements for search pane
+// Destroyed every time a search occurs!
 let searchResultElems = [];
-let shownVideoElements = [];
+
+// General feed elements
+let feedElements = [];
 
 // Info about YT loader state
 let nextYTPageKey;
 let isYTLoading = false;
 
+// Constant HTML elements:
 const feedArea = document.getElementById("feed");
-const bottom = document.getElementById("bottom");
+const searchResultArea = document.getElementById("searchResults");
+const bottom = document.getElementById("bottom");                       // Used for infinite scroll detection
 
-let youtuber_name = "aaaaa";
+// Generate a clickable YT search result by youtuber
+const addYTSearchResult = function(item) {
 
-const fillSearch = function() {
+    // Create div for channel
+    let subDiv = document.createElement("div");
+    subDiv.className = "searchResult";
+    searchResultArea.appendChild(subDiv);
+    searchResultElems.push(subDiv);
 
+    // Add channel name
+    let channelNameElem = document.createElement("p");
+    channelNameElem.appendChild(document.createTextNode(`${item.snippet.channelTitle} (id <code>${item.id.channelId}</code>)`));
+    subDiv.appendChild(channelNameElem);
+
+    // Add channel thumbnail
+    let channelThumbnailElem = document.createElement("img");
+    channelThumbnailElem.src = item.snippet.thumbnails.default.url;
+    channelThumbnailElem.setAttribute("position", "relative");
+    subDiv.appendChild(channelThumbnailElem);
+
+    // Set up click handler for thumbnail
+    channelThumbnailElem.addEventListener("click", function() {
+
+        // Destroy parent after click
+        subDiv.remove();
+
+        feedsData.push({
+            youtuberName: item.snippet.channelTitle,
+            id: item.id.channelId
+        });
+
+    });
+
+};
+
+// Populates feedElements with clickable YT search results
+const doYTSearch = function() {
+
+    // Get channel name
     let channelName = document.getElementById("field-channelName").value;
 
+    // Do the API call
     searchForChannel(channelName).then(
         (result) => {
             try {
 
                 let response = JSON.parse(result);
-                console.log(response);
                 document.getElementById("searchGlobalText").innerHTML = `${response.pageInfo.totalResults} results for "${channelName}"`;
                 
-                // Destroy search results
+                // Destroy existing search-result elements
                 for(let elem of searchResultElems) {
                     elem.remove();
                 }
-
-                let searchResultsArea = document.getElementById("searchResults");
+                
                 for(let item of response.items) {
-                    
-                    console.log(item);
-
-                    let subDiv = document.createElement("div");
-                    subDiv.className = "searchResult";
-                    searchResultsArea.appendChild(subDiv);
-                    searchResultElems.push(subDiv);
-
-                    let channelNameElem = document.createElement("p");
-                    channelNameElem.appendChild(document.createTextNode(`${item.snippet.channelTitle} (id ${item.id.channelId})`));
-                    subDiv.appendChild(channelNameElem);
-
-                    let channelThumbnailElem = document.createElement("img");
-                    channelThumbnailElem.src = item.snippet.thumbnails.default.url;
-                    channelThumbnailElem.setAttribute("position","relative");
-                    subDiv.appendChild(channelThumbnailElem);
-
-                    channelThumbnailElem.onclick = function(){
-                        youtuber_name = JSON.parse(JSON.stringify(item.snippet.channelTitle));
-                        youtuber_id = JSON.parse(JSON.stringify(item.snippet.channelId));
-                        console.log(youtuber_name);
-                        printchecklist(youtuber_name, youtuber_id );
-                    }; 
-
+                    addYTSearchResult(item);
                 }
 
             } catch(error) {
