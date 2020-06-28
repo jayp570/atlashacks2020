@@ -42,7 +42,7 @@ function printchecklist(ytber_name, ytber_id){
             }
 
             if(passed_array.includes())
-            passed_array.push([ytber_name, checkbox_check]);
+            passed_array.push({name: ytber_name, id: ytber_id, checked: checkbox_check});
             console.log(passed_array);
             
         }
