@@ -132,9 +132,12 @@ function scrollToTop() {
     document.documentElement.scrollTop = 0;
 }
 
-async function myfunc() {
-    let json = await getTweets("aragusea");
-    console.log(json);
-}
 
-myfunc();
+
+getTweets("aragusea").then((tweets) => {
+    console.log(tweets[0]);
+    embedTweet(tweets[0]).then((html) => {
+        console.log(html);
+        document.getElementById("testTweet").innerHTML = html;
+    });
+});
