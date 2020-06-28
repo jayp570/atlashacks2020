@@ -68,9 +68,9 @@ h1 {
 
 
 .csscard{
-    width: fit-content;
-    height: fit-content;
-    margin: 0 auto;
+    width: 960px;
+    height: 540px;
+    margin: auto;
     padding: 12px;
     border-radius: 10px 10px;
     box-shadow: 3px 10px 10px gray;
@@ -168,6 +168,10 @@ input[type='checkbox'] {
     visibility: visible; 
     -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
     animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+.twitter-tweet {
+    margin: auto;
 }
 
 @-webkit-keyframes fadein{
