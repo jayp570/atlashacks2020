@@ -67,6 +67,7 @@ const addYTSearchResult = function(item) {
     // Set up click handler for thumbnail
     channelThumbnailElem.addEventListener("click", function() {
 
+        printchecklist(item.snippet.channelTitle,item.id.channelId);
         // Destroy parent after click
         subDiv.remove();
 
