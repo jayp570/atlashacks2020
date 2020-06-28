@@ -29,6 +29,8 @@ const SECONDS_PER_DAY = SECONDS_PER_HOUR * 24;
 const SECONDS_PER_MONTH = SECONDS_PER_DAY * 30.5;
 const SECONDS_PER_YEAR = SECONDS_PER_MONTH * 12;
 
+console.log(final_passed_array)
+
 const monthToNum = {
 	"Jan": 0,
 	"Feb": 1,
