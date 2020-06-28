@@ -5,8 +5,14 @@ let passed_array = [];
 let checkbox_check = false;
 let checkbtn = document.getElementById("submitbtn");
 
+if(ytbers.length == 0) {
+    document.getElementById("emptyMessage").innerHTML = "You have no creators in your feed!"
+} else {
+    document.getElementById("emptyMessage").innerHTML = ""
+}
+
 function printchecklist(ytber_name, ytber_id){
-    
+
     if(ytber_id_list.indexOf(ytber_id) == -1){
         
         ytber_id_list.push(ytber_id)
@@ -48,8 +54,11 @@ function printchecklist(ytber_name, ytber_id){
         showtoast();
     }
 
-
-
+    if(ytbers.length == 0) {
+        document.getElementById("emptyMessage").innerHTML = "You have no creators in your feed!"
+    } else {
+        document.getElementById("emptyMessage").innerHTML = ""
+    }
     
 }
 
