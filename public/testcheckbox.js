@@ -1,12 +1,4 @@
-let string1 = "markipliers";
-let string2 = "jackjsepticyes";
-let string3 = "desinkular";
-let string4 = "hitler";
-let string5 = "jackjsepticyes";
-let string6 = "dinosaur";
-
-let ytbers = [string1, string2, string3, string4, string5, string6];
-
+let ytbers = [1,2,3,4];
 console.log(ytbers);
 for(let item of ytbers){
     let bigdiv = document.getElementById("bigdiv");
