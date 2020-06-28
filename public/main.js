@@ -130,4 +130,11 @@ window.addEventListener("scroll", () => {
 function scrollToTop() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
-  }
+}
+
+async function myfunc() {
+    let json = await getTweets("aragusea");
+    console.log(json);
+}
+
+myfunc();
