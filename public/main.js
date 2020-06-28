@@ -1,8 +1,13 @@
 let searchResultElems = [];
 let shownVideoElements = [];
+
+// Info about YT loader state
 let nextYTPageKey;
+let isYTLoading = false;
+
 const feedArea = document.getElementById("feed");
 const bottom = document.getElementById("bottom");
+
 let youtuber_name = "aaaaa";
 
 const fillSearch = function() {
@@ -68,37 +73,39 @@ const fillSearch = function() {
 
 const show = function() {
 
-    
-    try {
-        getVideosPlaylist(MARKIPLIER_ID).then((playlists) => {
-            playlists = JSON.parse(playlists);
-            console.log(playlists);
-            getVideosInPlaylist(playlists.items[0].contentDetails.relatedPlaylists.uploads, nextYTPageKey).then((videos) => {
-                
-                videos = JSON.parse(videos);
-                nextYTPageKey = videos.nextPageToken;
-                
-                for(let video of videos.items) {
+    if(!isYTLoading) {
+        try {
+            getVideosPlaylist(MARKIPLIER_ID).then((playlists) => {
+                playlists = JSON.parse(playlists);
+                isYTLoading = true;
+                getVideosInPlaylist(playlists.items[0].contentDetails.relatedPlaylists.uploads, nextYTPageKey).then((videos) => {
                     
-                    let cardElem = document.createElement("div");
-                    cardElem.classList.add("csscard");
+                    videos = JSON.parse(videos);
+                    nextYTPageKey = videos.nextPageToken;
                     
-                    let embeddedVideo = document.createElement("iframe");
-                    embeddedVideo.src = `https://www.youtube.com/embed/${video.contentDetails.videoId}`;
-                    embeddedVideo.width = 960;
-                    embeddedVideo.height = 540;
+                    for(let video of videos.items) {
+                        
+                        let cardElem = document.createElement("div");
+                        cardElem.classList.add("csscard");
+                        
+                        let embeddedVideo = document.createElement("iframe");
+                        embeddedVideo.src = `https://www.youtube.com/embed/${video.contentDetails.videoId}`;
+                        embeddedVideo.width = 960;
+                        embeddedVideo.height = 540;
 
-                    cardElem.appendChild(embeddedVideo);
-                    feedArea.appendChild(cardElem);
+                        cardElem.appendChild(embeddedVideo);
+                        feedArea.appendChild(cardElem);
 
-                }
+                    }
 
-            });    
-        });
-    } catch(error) {
-        console.log("Problems showing more videos: ", error);
-    }
-    
+                    isYTLoading = false;
+
+                });    
+            });
+        } catch(error) {
+            console.log("Problems showing more videos: ", error);
+        }
+    }    
 
     // for(let i = 0; i < 5; i++) {
     //     let cardElem = document.createElement("div");
