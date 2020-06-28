@@ -70,10 +70,10 @@ h1 {
     height: fit-content;
     margin: 0 auto;
     padding: 12px;
-    border: black solid 1px;
     border-radius: 10px 10px;
     box-shadow: 3px 10px 10px gray;
     margin-bottom: 20px;
+    background-color: #111;
 }
 
 input {
@@ -118,11 +118,13 @@ table {
 
 input[type='checkbox'] {
     float: left;
-    width: 20px;
+    width: 40px;
+    margin-bottom: 20px;
   }
   input[type='checkbox'] + label {
     display: block;
     width: 200px;
+    margin-bottom: 18px;
   }
 
 .about {
