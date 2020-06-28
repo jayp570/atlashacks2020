@@ -1,14 +1,7 @@
-let string1 = "markipliers";
-let string2 = "jackjsepticyes";
-let string3 = "desinkular";
-let string4 = "hitler";
-let string5 = "jackjsepticyes";
-let string6 = "dinosaur";
+let ytbers = [];
 
-let ytbers = [string1, string2, string3, string4, string5, string6];
-
-console.log(ytbers);
-for(let item of ytbers){
+function printchecklist(ytber_name){
+    ytbers.push(ytber_name)
     let bigdiv = document.getElementById("bigdiv");
     bigdiv.setAttribute("style","display: inline-block");
     let placeholder = document.createElement("div")
@@ -20,7 +13,7 @@ for(let item of ytbers){
     x.id =  "id";
     let label = document.createElement('label');
     label.htmlFor = "id";
-    label.append(document.createTextNode(item));
+    label.append(document.createTextNode(ytber_name));
     placeholder.appendChild(x);
     placeholder.appendChild(label);
     bigdiv.appendChild(placeholder);

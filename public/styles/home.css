@@ -70,10 +70,10 @@ h1 {
     height: fit-content;
     margin: 0 auto;
     padding: 12px;
-    border: black solid 1px;
     border-radius: 10px 10px;
     box-shadow: 3px 10px 10px gray;
     margin-bottom: 20px;
+    background-color: #111;
 }
 
 input {
@@ -88,7 +88,7 @@ input {
 button {
     background-color: #111;
     color: white;
-    /* transition-duration: 0.3s;  */
+    transition-duration: 0.3s; 
     font-weight: bold;
     padding: 10px;
     border: 0px;
@@ -99,10 +99,10 @@ button {
     display: block;
 }
 
-/* button:hover {
+button:hover {
     background-color: white;
     color: #111;
-} */
+}
 
 .searchResult {
     background-color: white;
@@ -118,9 +118,22 @@ table {
 
 input[type='checkbox'] {
     float: left;
-    width: 20px;
+    width: 40px;
+    margin-bottom: 20px;
   }
   input[type='checkbox'] + label {
     display: block;
     width: 200px;
+    margin-bottom: 18px;
   }
+
+.about {
+    font-size: 14px;
+    padding: 20px;
+    color: white;
+    background-color: #111;
+    margin-top: 40px;
+    width: 100%;
+    display: block;
+    margin-left: -20px;
+}

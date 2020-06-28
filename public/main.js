@@ -1,10 +1,9 @@
 let searchResultElems = [];
-
 let shownVideoElements = [];
 let nextYTPageKey;
-
 const feedArea = document.getElementById("feed");
 const bottom = document.getElementById("bottom");
+let youtuber_name = "aaaaa";
 
 const fillSearch = function() {
 
@@ -40,23 +39,21 @@ const fillSearch = function() {
                     let channelThumbnailElem = document.createElement("img");
                     channelThumbnailElem.src = item.snippet.thumbnails.default.url;
                     channelThumbnailElem.setAttribute("position","relative");
-
-                    channelThumbnailElem.onmouseover = function(){
-                        channelThumbnailElem.style.animationName = "smalltobig";
-                        console.log("dick");
-                    };
-                    
-                    channelThumbnailElem.onmouseout = function(){
-                        channelThumbnailElem.style.animationName = "bigtosmall";
-                    };
-                    
                     subDiv.appendChild(channelThumbnailElem);
 
                     channelThumbnailElem.onclick = function(){
-                        console.log(item.snippet.channelTitle);
+                        youtuber_name = JSON.parse(JSON.stringify(item.snippet.channelTitle));
+                        console.log(youtuber_name);
+                        printchecklist(youtuber_name);
                     }; 
-                     
+                    
+                    
+                    
 
+
+                    
+                     
+                    
 
                 }
 
@@ -69,8 +66,12 @@ const fillSearch = function() {
             console.log("Error: ", error);
         }
     );
+        
 
 };
+
+
+
 
 const show = function() {
 
