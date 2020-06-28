@@ -1,5 +1,6 @@
 # auth.js, of course
 auth.js
+auth_module.js
 
 # node_modules probably doesn't need committing...
 node_modules/
