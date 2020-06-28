@@ -46,6 +46,7 @@ const fillSearch = function() {
                         youtuber_id = JSON.parse(JSON.stringify(item.snippet.channelId));
                         console.log(youtuber_name);
                         printchecklist(youtuber_name, youtuber_id );
+                        
                     }; 
 
                 }

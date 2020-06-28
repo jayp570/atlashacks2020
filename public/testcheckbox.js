@@ -1,8 +1,9 @@
 let ytbers = [];
+let checkarray = [];
 let ytber_id_list = [];
 let passed_array = [];
-let checkbox_check;
-let submitbutton = document.getElementById("submitbtn");
+let checkbox_check = false;
+let checkbtn = document.getElementById("submitbtn");
 
 if(ytbers.length == 0) {
     document.getElementById("emptyMessage").innerHTML = "You have no creators in your feed!"
@@ -13,7 +14,7 @@ if(ytbers.length == 0) {
 function printchecklist(ytber_name, ytber_id){
 
     if(ytber_id_list.indexOf(ytber_id) == -1){
-        ytbers.push(ytber_name)
+        
         ytber_id_list.push(ytber_id)
         let bigdiv = document.getElementById("bigdiv");
         bigdiv.setAttribute("style","display: inline-block");
@@ -32,20 +33,18 @@ function printchecklist(ytber_name, ytber_id){
         bigdiv.appendChild(placeholder);
         let brk = document.createElement("br");
         bigdiv.appendChild(brk);
-        
-        x.onchange = function(){
-
-            if(x.checked == "true"){
-                checkbox_check = true;
-            }else{
-                checkbox_check = false;
-            }
-
-            if(passed_array.includes())
-            passed_array.push([ytber_name, checkbox_check]);
-            console.log(passed_array);
-            
+        if(x.checked == true){
+            checkbox_check = true;
         }
+        ytbers.push(ytber_name)
+        checkarray.push(checkbox_check);
+
+        checkbtn.onclick = function(){
+        console.log(checkarray);
+        console.log(ytbers);
+        }       
+    
+        
         
     }else{
         showtoast();
@@ -57,6 +56,9 @@ function printchecklist(ytber_name, ytber_id){
         document.getElementById("emptyMessage").innerHTML = ""
     }
     
+}
+
+function buttonbuziness(){
     
 }
 
@@ -71,4 +73,3 @@ function showtoast() {
     setTimeout(function(){ t.className = t.className.replace("show", ""); }, 3000);
   }
   
-
