@@ -4,6 +4,7 @@ let shownVideoElements = [];
 let nextYTPageKey;
 const feedArea = document.getElementById("feed");
 const bottom = document.getElementById("bottom");
+let youtuber_name;
 
 const fillSearch = function() {
 
@@ -42,7 +43,7 @@ const fillSearch = function() {
                     subDiv.appendChild(channelThumbnailElem);
 
                     channelThumbnailElem.onclick = function(){
-                        console.log(item.snippet.channelTitle);
+                        youtube_name = item.snippet.channelTitle;
                     }; 
                      
 
