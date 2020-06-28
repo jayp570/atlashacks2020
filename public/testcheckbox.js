@@ -10,10 +10,6 @@ x.type = "checkbox";
 x.name = "name";
 x.value = "value";
 
-
-
-
-
 if(ytbers.length == 0) {
     document.getElementById("emptyMessage").innerHTML = "You have no creators in your feed!"
 } else {
