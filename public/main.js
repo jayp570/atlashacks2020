@@ -264,10 +264,15 @@ const getTwitterContent = async function() {
 
 const updateFeed = async function() {
     if(!loading) {
+        
+        loading = true;
+
         await getYoutubeContent();
         await getTwitterContent();
         updateFeedDOM();
+
         loading = false;
+    
     }
 };
 
