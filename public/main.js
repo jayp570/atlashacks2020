@@ -8,12 +8,6 @@ let searchResultElems = [];
 // General feed elements
 let feedContent = [];
 
-// Info about YT loader state
-let nextYTPageKey;
-
-// Info about twitter state
-let twitterMaxID;
-
 // Is loading?
 let loading = false;
 
@@ -47,7 +41,7 @@ const monthToNum = {
 };
 
 // Generate a clickable YT search result by youtuber
-const addYTSearchResult = function(item) {
+const addYTSearchResult = async function(item) {
 
     // Create div for channel
     let subDiv = document.createElement("div");
@@ -67,16 +61,32 @@ const addYTSearchResult = function(item) {
     subDiv.appendChild(channelThumbnailElem);
 
     // Set up click handler for thumbnail
-    channelThumbnailElem.addEventListener("click", function() {
+    channelThumbnailElem.addEventListener("click", async function() {
 
-        printchecklist(item.snippet.channelTitle,item.id.channelId);
+        // ???
+        printchecklist(item.snippet.channelTitle, item.id.channelId);
+
         // Destroy parent after click
         subDiv.remove();
 
+        let links = await getChannelLinks(item.id.channelId);
+        let screenName;
+        let hasTwitter = false;
+        for(let link of links) {
+            if(link.indexOf("twitter") != -1) {
+                screenName = new URL(link).pathname.replace(/\//g, "");
+                hasTwitter = true;
+            }
+        }
+
         feeds.push({
             youtuberName: item.snippet.channelTitle,
-            id: item.id.channelId
+            youtubeId: item.id.channelId,
+            twitterScreenName: screenName,
+            hasTwitter: hasTwitter,
+            minimumTweet: {id: Infinity}
         });
+
         updateFeed();
 
         console.log(feeds);
@@ -217,11 +227,11 @@ const addVideoToFeed = function(video) {
 
 };
 
-const getYoutubeContent = async function(channelID) {
+const getYoutubeContent = async function(feed) {
 
     try {
             
-        let playlists = await getVideosPlaylist(channelID);
+        let playlists = await getVideosPlaylist(feed.youtubeId);
         console.log(playlists);
 
         // Mark as loading to avoid loading extra posts while waiting for an initial request
@@ -229,11 +239,11 @@ const getYoutubeContent = async function(channelID) {
         isYTLoading = true;
                 
         // Request videos in playlist
-        let videos = await getVideosInPlaylist(playlists.items[0].contentDetails.relatedPlaylists.uploads, nextYTPageKey);
+        let videos = await getVideosInPlaylist(playlists.items[0].contentDetails.relatedPlaylists.uploads, feed.nextPageToken);
                     
         // Self-parse
         videos = JSON.parse(videos);
-        nextYTPageKey = videos.nextPageToken;
+        feed.nextPageToken = videos.nextPageToken;
                     
         for(let video of videos.items) {
             addVideoToFeed(video);
@@ -245,15 +255,26 @@ const getYoutubeContent = async function(channelID) {
 
 };
 
-const getTwitterContent = async function() {
+const getTwitterContent = async function(feed) {
 
-    let tweets = await getTweets("aragusea", twitterMaxID);
+    let tweets;
+    if(feed.minimumTweet.id == Infinity)
+        tweets = await getTweets(feed.twitterScreenName);
+    else
+        tweets = await getTweets(feed.twitterScreenName, feed.minimumTweet.id);
+
+    console.log("tweet", tweets);
     for(let tweet of tweets) {
 
         let elem = document.createElement("div");
         elem.innerHTML = embedTweet(tweet);
 
         twttr.widgets.load(elem);
+
+        // Update creator's min tweet
+        if(tweet.id < feed.minimumTweet) {
+            feed.minimumTweet = tweet;
+        }
 
         insertIntoFeed({
             type: "twitter",
@@ -267,31 +288,27 @@ const getTwitterContent = async function() {
 };
 
 const updateFeed = async function() {
+
     if(!loading) {
         
         loading = true;
 
-        for(let channel in feeds) {
-            await getYoutubeContent(channel.id);
+        for(let channel of feeds) {
+            await getYoutubeContent(channel);
         }
-        await getTwitterContent();
-        updateFeedDOM();
 
-        // update maximum twitter ID
-        let maxTweet = {timestamp: Infinity};
-        for(let item of feedContent) {
-            if(item.type == "twitter") {
-                if(item.timestamp < maxTweet.timestamp) {
-                    maxTweet = item;
-                }
+        for(let channel of feeds) {
+            if(channel.hasTwitter) {
+                await getTwitterContent(channel);
             }
         }
 
-        twitterMaxID = maxTweet.tweet.id;
+        updateFeedDOM();
 
         loading = false;
     
     }
+
 };
 
 // Scroll features

@@ -42,7 +42,6 @@ const tryGetChannelLinks = function(channelURL) {
                 let parser = new DOMParser();
                 let doc = parser.parseFromString(request.response, "text/html");
 
-                //let elems = doc.querySelectorAll(".about-channel-link.yt-uix-redirect-link.about-channel-link-with-icon");
                 let elems = doc.querySelectorAll("a.about-channel-link");
                 let redirects = [...elems].map(elem => elem.href);
 
@@ -99,7 +98,6 @@ const getVideosPlaylist = function(channelID) {
         
         request.onload = () => {
             if(request.status >= 200 && request.status < 300) {
-                console.log("Debug in getVideosPlaylist: " + request.response);
                 resolve(request.response);
             } else {
                 reject({
@@ -131,7 +129,6 @@ const getVideosInPlaylist = function(playlistID, nextPageKey) {
         
         request.onload = () => {
             if(request.status >= 200 && request.status < 300) {
-                console.log("Debug in getVideosInPlaylist: " + request.response);
                 resolve(request.response);
             } else {
                 reject({
