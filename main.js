@@ -17,7 +17,7 @@ app.use((request, response, next) => {
     next();
 });
 
-app.get("/api/yt-passthrough", (request, response) => {
+app.get("/api/cors-passthrough", (request, response) => {
     try {
         
         let URL = request.query.url;
@@ -28,7 +28,32 @@ app.get("/api/yt-passthrough", (request, response) => {
             },
             (error, response2, body) => {
                 if(error || response2.statusCode != 200) {
-                    return response.status(500).json({type: "error", message: error.message});
+                    console.log(response2.statusCode);
+                    return response.status(500).json({type: "error"});
+                }
+
+                response.send(body);
+            }
+        );
+
+    } catch(error) {
+        console.log("Problem while handling CORS passthrough request: ", error);
+    }
+});
+
+app.post("/api/cors-passthrough", (request, response) => {
+    try {
+        
+        let URL = request.query.url;
+
+        requester(
+            {
+                url: decodeURI(URL)
+            },
+            (error, response2, body) => {
+                if(error || response2.statusCode != 200) {
+                    console.log(response2.statusCode);
+                    return response.status(500).json({type: "error"});
                 }
 
                 response.send(body);

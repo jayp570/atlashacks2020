@@ -71,7 +71,7 @@ const getChannelLinks = function(channelURL) {
             });
         };
 
-        request.open("GET", `/api/yt-passthrough?url=${encodeURIComponent(channelURL)}`);
+        request.open("GET", `/api/cors-passthrough?url=${encodeURIComponent(channelURL)}`);
         request.send();
 
     });
@@ -109,7 +109,7 @@ const getVideosPlaylist = function(channelID) {
 
 };
 
-const getVideosInPlaylist = function(name) {
+const getVideosInPlaylist = function(playlistID, nextPageKey) {
 
     return new Promise((resolve, reject) => {
 
@@ -133,7 +133,7 @@ const getVideosInPlaylist = function(name) {
             });
         };
 
-        request.open("GET", `https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=${name}&count=20`);
+        request.open("GET", `https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=&playlistId=${playlistID}&key=${GOOGLE_API_KEY}${nextPageKey !== undefined ? "&pageToken=" + nextPageKey : ""}`);
         request.send();
 
     });    
