@@ -148,6 +148,7 @@ input[type='checkbox'] {
     border-left: solid #111 4px;
     border-bottom: solid #111 4px;
     border-right: solid #111 4px;
+    z-index: 5;
 }
 
 #toast{
