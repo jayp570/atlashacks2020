@@ -134,4 +134,7 @@ input[type='checkbox'] {
     background-color: #111;
     margin-top: 40px;
     border-radius: 15px;
+    width: 100%;
+    display: block;
+    margin-left: -20px;
 }
