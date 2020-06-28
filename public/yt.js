@@ -29,7 +29,7 @@ const searchForChannel = function(channelName) {
 
 };
 
-const getChannelLinks = function(channelURL) {
+const tryGetChannelLinks = function(channelURL) {
 
     return new Promise((resolve, reject) => {
 
@@ -52,7 +52,6 @@ const getChannelLinks = function(channelURL) {
                 });
 
                 // Remove duplicates 
-                console.log([...new Set(links)]);
                 resolve([...new Set(links)]);
 
             } else {
@@ -77,6 +76,20 @@ const getChannelLinks = function(channelURL) {
     });
 
 };
+
+const getChannelLinks = async function(channelID) {
+
+    let url = `https://www.youtube.com/channel/${channelID}/about`;
+    for(let attempt = 0; attempt < 10; attempt++) {
+        let links = await tryGetChannelLinks(url);
+        if(links.length != 0 && links[0] != null) {
+            return links;
+        }
+    }
+
+    return [];
+
+}
 
 const getVideosPlaylist = function(channelID) {
 

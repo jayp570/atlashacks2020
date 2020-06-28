@@ -35,7 +35,10 @@ app.get("/api/cors-passthrough", (request, response) => {
 
         requester(
             {
-                url: decodeURI(URL)
+                url: decodeURI(URL),
+                headers: {
+                    "User-Agent": "Chrome/49.0.2623.112"
+                }
             },
             (error, response2, body) => {
                 if(error || response2.statusCode != 200) {
