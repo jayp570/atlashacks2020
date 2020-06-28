@@ -66,21 +66,6 @@ app.get("/api/twitter", (request, response) => {
     }
 });
 
-app.get("/api/twitterembed", (request, response) => {
-    try {
-        twitter.get("statuses/oembed", {url: `https://twitter.com/${request.query.name}/status/${request.query.id}`, theme: "dark", dnt: true}, (error, tweet, response2) => {
-            if(!error) {
-                response.send(response2);
-            } else {
-                console.log(error, tweet, response2);
-                response.status(400).json({type: "error"});
-            }
-        });
-    } catch(error) {
-        console.log("Problem while embedding tweet: ", error);
-    }
-});
-
 // Server definition
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);

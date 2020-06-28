@@ -131,14 +131,3 @@ function scrollToTop() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
 }
-
-
-
-getTweets("aragusea").then((tweets) => {
-    for(let tweet of tweets) {
-        embedTweet(tweet).then((html) => {
-            console.log(html);
-            document.getElementById("testTweet").innerHTML += html;
-        });
-    }
-});
