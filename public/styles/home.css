@@ -28,6 +28,7 @@ h1 {
     background-color: #ffffff;
     margin-bottom: 20px;
     padding: 20px;
+    height: 50px;
 }
 
 
@@ -136,4 +137,10 @@ input[type='checkbox'] {
     width: 100%;
     display: block;
     margin-left: -20px;
+}
+
+.scrollButton {
+    position: sticky;
+    top: 90px;
+    display: none;
 }
