@@ -24,7 +24,7 @@ function printchecklist(ytber_name, ytber_id){
         let brk = document.createElement("br");
         bigdiv.appendChild(brk);
     }else{
-        alert("You already added this youtuber. Try another one!");
+        
     }
     
     
