@@ -86,6 +86,7 @@ const getVideosPlaylist = function(channelID) {
         
         request.onload = () => {
             if(request.status >= 200 && request.status < 300) {
+                console.log("Debug in getVideosPlaylist: " + request.response);
                 resolve(request.response);
             } else {
                 reject({
@@ -117,6 +118,7 @@ const getVideosInPlaylist = function(playlistID, nextPageKey) {
         
         request.onload = () => {
             if(request.status >= 200 && request.status < 300) {
+                console.log("Debug in getVideosInPlaylist: " + request.response);
                 resolve(request.response);
             } else {
                 reject({
@@ -133,7 +135,7 @@ const getVideosInPlaylist = function(playlistID, nextPageKey) {
             });
         };
 
-        request.open("GET", `https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=&playlistId=${playlistID}&key=${GOOGLE_API_KEY}${nextPageKey !== undefined ? "&pageToken=" + nextPageKey : ""}`);
+        request.open("GET", `https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=10&playlistId=${playlistID}&key=${GOOGLE_API_KEY}${nextPageKey !== undefined ? "&pageToken=" + nextPageKey : ""}`);
         request.send();
 
     });    
