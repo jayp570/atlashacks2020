@@ -68,7 +68,7 @@ const fillSearch = function() {
 
 const show = function() {
 
-    /*
+    
     try {
         getVideosPlaylist(MARKIPLIER_ID).then((playlists) => {
             playlists = JSON.parse(playlists);
@@ -98,20 +98,20 @@ const show = function() {
     } catch(error) {
         console.log("Problems showing more videos: ", error);
     }
-    */
+    
 
-    for(let i = 0; i < 5; i++) {
-        let cardElem = document.createElement("div");
-        cardElem.classList.add("csscard");
+    // for(let i = 0; i < 5; i++) {
+    //     let cardElem = document.createElement("div");
+    //     cardElem.classList.add("csscard");
         
-        let embeddedVideo = document.createElement("iframe");
-        embeddedVideo.src = `https://www.youtube.com/embed/oHg5SJYRHA0`;
-        embeddedVideo.width = 960;
-        embeddedVideo.height = 540;
+    //     let embeddedVideo = document.createElement("iframe");
+    //     embeddedVideo.src = `https://www.youtube.com/embed/oHg5SJYRHA0`;
+    //     embeddedVideo.width = 960;
+    //     embeddedVideo.height = 540;
 
-        cardElem.appendChild(embeddedVideo);
-        feedArea.appendChild(cardElem); 
-    }
+    //     cardElem.appendChild(embeddedVideo);
+    //     feedArea.appendChild(cardElem); 
+    // }
 
 };
 
@@ -171,16 +171,14 @@ function sortTweets(tweets) {
     return list;
 }
 
-// getTweets("aragusea").then((tweets) => {
-//     for(let tweet of tweets) {
-//         embedTweet(tweet).then((html) => {
-//             console.log(html);
-//             document.getElementById("testTweet").innerHTML += html;
-//         });
-//     }
-//     setTimeout(function() {}, 800);
-//     twttr.widgets.load();
-// });
+getTweets("markiplier").then((tweets) => {
+    for(let tweet of tweets) {
+        let html = embedTweet(tweet);
+        document.getElementById("testTweet").innerHTML += html;
+    }
+    setTimeout(function() {}, 800);
+    twttr.widgets.load();
+});
 
 let tweets = [];
 
