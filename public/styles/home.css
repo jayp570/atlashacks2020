@@ -23,6 +23,7 @@ h1 {
 }
 
 .stickyheader{
+    position: -webkit-sticky; 
     position: sticky;
     top: 0;
     border-radius: 20px;
