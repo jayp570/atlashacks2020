@@ -44,7 +44,6 @@ const fillSearch = function() {
                     channelThumbnailElem.onclick = function(){
                         youtuber_name = JSON.parse(JSON.stringify(item.snippet.channelTitle));
                         youtuber_id = JSON.parse(JSON.stringify(item.snippet.channelId));
-                        console.log(youtuber_name);
                         printchecklist(youtuber_name, youtuber_id );
                     }; 
 
@@ -134,11 +133,11 @@ function scrollToTop() {
 
 
 
-getTweets("aragusea").then((tweets) => {
-    for(let tweet of tweets) {
-        embedTweet(tweet).then((html) => {
-            console.log(html);
-            document.getElementById("testTweet").innerHTML += html;
-        });
-    }
-});
+// getTweets("aragusea").then((tweets) => {
+//     for(let tweet of tweets) {
+//         embedTweet(tweet).then((html) => {
+//             console.log(html);
+//             document.getElementById("testTweet").innerHTML += html;
+//         });
+//     }
+// });
