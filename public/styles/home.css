@@ -5,6 +5,20 @@ body {
     color: white;
 }
 
+body::-webkit-scrollbar {
+    width: 20px;
+}
+
+body::-webkit-scrollbar-track {
+    background: #111;        /* color of the tracking area */
+  }
+
+body::-webkit-scrollbar-thumb {
+    background-color: gray;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: 3px solid #111;  /* creates padding around scroll thumb */
+}
+
 h1 {
     text-align: center;
     margin: 0;
@@ -36,6 +50,24 @@ h1 {
 
 .sidebar {
     color: white;
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 12px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: #111;        /* color of the tracking area */
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background-color: gray;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: 3px solid #111;  /* creates padding around scroll thumb */
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 #xyz{

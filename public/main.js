@@ -75,6 +75,9 @@ const addYTSearchResult = function(item) {
             youtuberName: item.snippet.channelTitle,
             id: item.id.channelId
         });
+        updateFeed();
+
+        console.log(feeds);
 
     });
 
@@ -212,11 +215,11 @@ const addVideoToFeed = function(video) {
 
 };
 
-const getYoutubeContent = async function() {
+const getYoutubeContent = async function(channelID) {
 
     try {
             
-        let playlists = await getVideosPlaylist(MARKIPLIER_ID);
+        let playlists = await getVideosPlaylist("UC9_p50tH3WmMslWRWKnM7dQ");
 
         // Mark as loading to avoid loading extra posts while waiting for an initial request
         playlists = JSON.parse(playlists);
@@ -268,7 +271,9 @@ const updateFeed = async function() {
         
         loading = true;
 
-        await getYoutubeContent();
+        for(let channel in feeds) {
+            await getYoutubeContent(channel.id);
+        }
         await getTwitterContent();
         updateFeedDOM();
 
