@@ -127,6 +127,7 @@ const getYoutubeContent = function() {
                         // feedArea.appendChild(cardElem);
 
                     }
+                    console.log(feedContent);
 
                     isYTLoading = false;
 
@@ -162,43 +163,20 @@ const getTwitterContent = function() {
                 }
             )
         }
+        console.log(feedContent);
         // setTimeout(function() {}, 800);
         // twttr.widgets.load();
     });
 }
 
-function showFeed() {
-    for(let content of feedContent) {
-        if(content.type == "youtube") {
 
-            let cardElem = document.createElement("div");
-            cardElem.classList.add("csscard");
-            
-            let embeddedVideo = document.createElement("iframe");
-            embeddedVideo.src = `https://www.youtube.com/embed/${video.contentDetails.videoId}`;
-            embeddedVideo.width = 960;
-            embeddedVideo.height = 540;
-
-            cardElem.appendChild(embeddedVideo);
-            feedArea.appendChild(cardElem);
-
-        } else if(content.type == "twitter") {
-
-            let html = embedTweet(tweet);
-            feedArea.innerHTML += html;
-
-        }
-    } 
-    setTimeout(function() {}, 800);
-    twttr.widgets.load();
-}
 
 
 
 function getDate(content) {
     if(content.type == "twitter") {
         let tweet = JSON.parse(JSON.stringify(content))
-        let date = tweet.created_at;
+        let date = tweet.content.created_at;
         let month = date.substring(4,7);
         let day = parseInt(date.substring(8,10))
         let year = parseInt(date.substring(26,date.length))
@@ -217,11 +195,11 @@ function getDate(content) {
         day*=1440;
         month*=43800;
         year*=525600;
-        //console.log(month+" "+day+" "+year+" "+hour+":"+minute);
+        console.log(content.type+" "+month+" "+day+" "+year+" "+hour+":"+minute);
         return month+day+year+hour+minute;
     } else if(content.type == "youtube") {
         let video = JSON.parse(JSON.stringify(content)) 
-        let date = video.contentDetails.videoPublishedAt;
+        let date = video.content.contentDetails.videoPublishedAt;
         let year = parseInt(date.substring(0,4))
         let month = parseInt(date.substring(5,7))
         let day = parseInt(date.substring(8,10))
@@ -231,11 +209,12 @@ function getDate(content) {
         day*=1440;
         month*=43800;
         year*=525600;
+        console.log(content.type+" "+month+" "+day+" "+year+" "+hour+":"+minute);
         return month+day+year+hour+minute;
     }
 }
 
-function sortTweets(tweets) {
+function sortContent(tweets) {
     let list = JSON.parse(JSON.stringify(tweets))
     for(let i = 0; i < list.length-1; i++) {
         for(let j = 0; j < list.length-i-1; j++) {
@@ -247,16 +226,39 @@ function sortTweets(tweets) {
             }
         }
     }
+    console.log(list);
     return list;
 }
 
-getTweets("markiplier").then((tweets) => {
-    for(let tweet of tweets) {
-        let html = embedTweet(tweet);
-        document.getElementById("testTweet").innerHTML += html;
-    }
-    
-});
+function showFeed() {
+    feedContent = sortContent(feedContent)
+    console.log(feedContent);
+    for(let post of feedContent) {
+        if(post.type == "youtube") {
+
+            let cardElem = document.createElement("div");
+            cardElem.classList.add("csscard");
+            
+            let embeddedVideo = document.createElement("iframe");
+            embeddedVideo.src = `https://www.youtube.com/embed/${post.content.contentDetails.videoId}`;
+            embeddedVideo.width = 960;
+            embeddedVideo.height = 540;
+
+            cardElem.appendChild(embeddedVideo);
+            document.getElementById("feed").appendChild(cardElem);
+
+        } else if(post.type == "twitter") {
+
+            let html = embedTweet(post.content);
+            document.getElementById("feed").innerHTML += html;
+
+        }
+    } 
+    setTimeout(function() {}, 800);
+    twttr.widgets.load();
+}
+
+
 
 
 
