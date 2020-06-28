@@ -45,7 +45,7 @@ const addYTSearchResult = function(item) {
 
         // Destroy parent after click
         subDiv.remove();
-        
+
         feedsData.push({
             youtuberName: item.snippet.channelTitle,
             id: item.id.channelId
@@ -73,9 +73,7 @@ const doYTSearch = function() {
                 for(let elem of searchResultElems) {
                     elem.remove();
                 }
-
-                console.log(response.items);
-
+                
                 for(let item of response.items) {
                     addYTSearchResult(item);
                 }
