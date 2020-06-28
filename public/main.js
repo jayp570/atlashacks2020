@@ -221,7 +221,8 @@ const getYoutubeContent = async function(channelID) {
 
     try {
             
-        let playlists = await getVideosPlaylist(ADAM_RAGUSEA_ID);
+        let playlists = await getVideosPlaylist(channelID);
+        console.log(playlists);
 
         // Mark as loading to avoid loading extra posts while waiting for an initial request
         playlists = JSON.parse(playlists);
