@@ -16,6 +16,16 @@ h1 {
     width: 35%;
 }
 
+.ytbtnformat{
+    display: inline-flex;
+
+}
+
+.twtbtnformat{
+    display: inline-flex;
+
+}
+
 #embed{
     border: 0;
     margin: 0;

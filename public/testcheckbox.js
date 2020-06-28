@@ -63,9 +63,8 @@ submitbutton.onclick = function(){
     }
     console.log(checkboxid);
     console.log(ytbers);
-    console.log(final_passed_array)
+    console.log(final_passed_array);
 }
-
 
 function showtoast() {
     var t = document.getElementById("toast");
@@ -73,4 +72,3 @@ function showtoast() {
     setTimeout(function(){ t.className = t.className.replace("show", ""); }, 3000);
   }
   
-
