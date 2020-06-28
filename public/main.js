@@ -218,7 +218,7 @@ const getYoutubeContent = async function() {
 
     try {
             
-        let playlists = await getVideosPlaylist(MARKIPLIER_ID);
+        let playlists = await getVideosPlaylist(ADAM_RAGUSEA_ID);
 
         // Mark as loading to avoid loading extra posts while waiting for an initial request
         playlists = JSON.parse(playlists);
@@ -243,7 +243,7 @@ const getYoutubeContent = async function() {
 
 const getTwitterContent = async function() {
 
-    let tweets = await getTweets("markiplier", twitterMaxID);
+    let tweets = await getTweets("aragusea", twitterMaxID);
     for(let tweet of tweets) {
 
         let elem = document.createElement("div");
@@ -260,9 +260,6 @@ const getTwitterContent = async function() {
         });
 
     }
-
-    twitterMaxID = tweets[tweets.length - 1].id;
-
 };
 
 const updateFeed = async function() {
@@ -273,6 +270,18 @@ const updateFeed = async function() {
         await getYoutubeContent();
         await getTwitterContent();
         updateFeedDOM();
+
+        // update maximum twitter ID
+        let maxTweet = {timestamp: Infinity};
+        for(let item of feedContent) {
+            if(item.type == "twitter") {
+                if(item.timestamp < maxTweet.timestamp) {
+                    maxTweet = item;
+                }
+            }
+        }
+
+        twitterMaxID = maxTweet.tweet.id;
 
         loading = false;
     
