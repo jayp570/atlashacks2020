@@ -10,6 +10,9 @@ x.type = "checkbox";
 x.name = "name";
 x.value = "value";
 
+let showingTwitter = true;
+let showingYoutube = true;
+
 if(ytbers.length == 0) {
     document.getElementById("emptyMessage").innerHTML = "You have no creators in your feed!"
 } else {
@@ -59,9 +62,18 @@ submitbutton.onclick = function(){
             final_passed_array[k-1,k-1] = [[ytbers[k-1],false]]
         }
     }
+
+    if(document.getElementById("ytbtn").checked == true) {
+        showingYoutube = true;
+    } else {showingYoutube = false}
+    if(document.getElementById("twtbtn").checked == true) {
+        showingTwitter = true;
+    } else {showingTwitter = false}
+
     console.log(checkboxid);
     console.log(ytbers);
     console.log(final_passed_array);
+
 }
 
 function showtoast() {
@@ -69,4 +81,6 @@ function showtoast() {
     t.className = "show";
     setTimeout(function(){ t.className = t.className.replace("show", ""); }, 3000);
   }
+
+
   

@@ -291,13 +291,29 @@ const updateFeed = async function() {
         
         loading = true;
 
+
         for(let channel of feeds) {
             await getYoutubeContent(channel);
         }
+        
+
 
         for(let channel of feeds) {
             if(channel.hasTwitter) {
                 await getTwitterContent(channel);
+            }
+        }
+
+        for(let item of feedContent) {
+            if(showingTwitter == false) {
+                if(item.type == "twitter") {
+                    item.DOMElement.visibility = "hidden";
+                }
+            }
+            if(showingYoutube == false) {
+                if(item.type == "youtube") {
+                    item.DOMElement.visibility = "hidden";
+                }
             }
         }
 
