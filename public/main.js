@@ -93,8 +93,6 @@ const addYTSearchResult = async function(item) {
 
         updateFeed();
 
-        console.log(feeds);
-
     });
 
 };
@@ -151,7 +149,6 @@ const convertYTDate = function(date) {
 
 // Convert twitter date to timestamp
 const convertTwitterDate = function(date) {
-    console.log(monthToNum[date.substring(4, 7)], date.substring(4, 7));
     return date.substring(26, 30) * SECONDS_PER_YEAR + 
         monthToNum[date.substring(4, 7)] * SECONDS_PER_MONTH +
         date.substring(8, 10) * SECONDS_PER_DAY + 
@@ -174,13 +171,12 @@ const updateFeedDOM = function() {
         let item = feedContent[i];
         if(item.needsInsert) {
 
-            let nextElem = getNextReadyItemInFeed();
-            console.log(nextElem);
+            let nextElem = getNextReadyItemInFeed(i);
 
             if(nextElem === undefined) {
                 feedArea.appendChild(item.DOMElement);
             } else {
-                feedArea.insertBefore(item.DOMElement, nextElem);
+                feedArea.insertBefore(item.DOMElement, nextElem.DOMElement);
             }
 
             item.needsInsert = false;
@@ -236,7 +232,6 @@ const getYoutubeContent = async function(feed) {
     try {
             
         let playlists = await getVideosPlaylist(feed.youtubeId);
-        console.log(playlists);
 
         // Mark as loading to avoid loading extra posts while waiting for an initial request
         playlists = JSON.parse(playlists);
@@ -267,7 +262,6 @@ const getTwitterContent = async function(feed) {
     else
         tweets = await getTweets(feed.twitterScreenName, feed.minimumTweet.id);
 
-    console.log("tweet", tweets);
     for(let tweet of tweets) {
 
         let elem = document.createElement("div");
