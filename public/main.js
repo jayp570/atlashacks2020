@@ -119,13 +119,13 @@ const addYTSearchResult = async function(item) {
             // console.log(ytbers);
 
             if(document.getElementById("twtbtn").checked == true) {
-                showingTwitter = false;
+                showingTwitter = true;
             } else {    
                 showingTwitter = false
             }
 
             if(document.getElementById("ytbtn").checked == true) {
-                showingYoutube = false;
+                showingYoutube = true;
             } else {    
                 showingYoutube = false
             }
