@@ -88,7 +88,7 @@ html {
 
 .feedFilter {
     height: 100%; /* Full-height: remove this if you want "auto" height */
-    width: 300px; /* Set the width of the sidebar */
+    width: 400px; /* Set the width of the sidebar */
     position: fixed; /* Fixed Sidebar (stay in place on scroll) */
     z-index: 10; /* Stay on top */
     top: 0; /* Stay at the top */
@@ -100,7 +100,7 @@ html {
 
 .addCreator {
     height: 100%; /* Full-height: remove this if you want "auto" height */
-    width: 300px; /* Set the width of the sidebar */
+    width: 400px; /* Set the width of the sidebar */
     position: fixed; /* Fixed Sidebar (stay in place on scroll) */
     z-index: 10; /* Stay on top */
     top: 0; /* Stay at the top */

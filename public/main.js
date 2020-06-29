@@ -107,7 +107,7 @@ const addYTSearchResult = async function(item) {
                     if((temparray[k][k+1]) != true){
                         console.log(feedContent);
                         for(let n = 0; n < feedContent.length; n++){
-                            if(YTUserName == name){
+                            if(YTUserName == feedContent[n].youtuberName){
                                 console.log(YTUserName);
                                 feedContent[n].DOMElement.style.display = "none";
                             }
@@ -384,6 +384,11 @@ window.addEventListener("scroll", () => {
         scrollButton.style.display = "none";
     }
 });
+
+function scrollToTop() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  }
 
 function loadSettings() {
     let sFeeds = JSON.parse(localStorage.getItem("feeds"));
