@@ -112,9 +112,6 @@ const addYTSearchResult = async function(item) {
                     }
                 }
             }
-            // console.log(checkboxid);
-            // console.log(ytbers);
-            
         }
 
         updateFeed();
@@ -370,4 +367,9 @@ function scrollToTop() {
     document.documentElement.scrollTop = 0;
 }
 
+function loadSettings() {
+
+}
+
+loadSettings();
 updateFeed();
