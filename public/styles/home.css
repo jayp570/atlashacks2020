@@ -141,7 +141,7 @@ input {
 
 button {
     background-color: white;
-    color: #111;
+    color: black;
     transition-duration: 0.3s; 
     font-weight: bold;
     padding: 10px;
@@ -154,7 +154,7 @@ button {
 }
 
 button:hover {
-    background-color: #555;
+    background-color: black;
     color: white;
 }
 
