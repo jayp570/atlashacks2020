@@ -107,7 +107,7 @@ const addYTSearchResult = async function(item) {
                         console.log(feedContent);
                         for(let n = 0; n < feedContent.length; n++){
                             console.log(YTUserName);
-                            feedContent[n].DOMElement.visibility = "hidden";
+                            feedContent[n].DOMElement.style.visibility = "none";
                         }
                     }
                 }
