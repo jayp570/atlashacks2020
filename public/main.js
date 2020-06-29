@@ -379,14 +379,13 @@ window.addEventListener("scroll", () => {
     }
 });
 
-function scrollToTop() {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-}
-
 function loadSettings() {
 
 }
+
+window.onunload = function() {
+    
+};
 
 loadSettings();
 updateFeed();
