@@ -106,8 +106,16 @@ const addYTSearchResult = async function(item) {
                     if((temparray[k][k+1]) != true){
                         console.log(feedContent);
                         for(let n = 0; n < feedContent.length; n++){
+                            if(YTUserName == name){
+                                console.log(YTUserName);
+                                feedContent[n].DOMElement.style.display = "none";
+                            }
+                            
+                        }
+                    }else{
+                        for(let n = 0; n < feedContent.length; n++){
                             console.log(YTUserName);
-                            feedContent[n].DOMElement.style.visibility = "none";
+                            feedContent[n].DOMElement.style.display = "block";
                         }
                     }
                 }
