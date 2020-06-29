@@ -194,6 +194,7 @@ const insertIntoFeed = function(newItem) {
         if(newItem.timestamp > item.timestamp) {
 
             // Use splice to insert new item at i
+            if(newItem.type == "twitter") console.log("-- SPLICE ", newItem.tweet.id);
             feedContent.splice(i, 0, newItem);
             return;
 

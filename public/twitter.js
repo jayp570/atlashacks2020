@@ -6,7 +6,9 @@ const getTweets = function(handle, after) {
         
         request.onload = () => {
             if(request.status >= 200 && request.status < 300) {
-                resolve(JSON.parse(JSON.parse(request.response).body));
+                let result = JSON.parse(JSON.parse(request.response).body);
+                result.shift();
+                resolve(result);
             } else {
                 reject({
                     status: request.status,

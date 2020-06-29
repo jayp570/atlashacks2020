@@ -1,2 +1,0 @@
-const MARKIPLIER_ID = "UC7_YxT-KID8kRbqZo7MyscQ";
-const ADAM_RAGUSEA_ID = "UC9_p50tH3WmMslWRWKnM7dQ";
