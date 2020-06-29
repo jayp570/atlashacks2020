@@ -44,7 +44,7 @@ function printchecklist(ytber_name, ytber_id){
     }
 
     if(ytbers.length == 0) {
-        document.getElementById("emptyMessage").innerHTML = "You have no creators in your feed!"
+        document.getElementById("emptyMessage").innerHTML = "\t     You have no creators in your feed!"
     } else {
         document.getElementById("emptyMessage").innerHTML = ""
     }
