@@ -109,8 +109,16 @@ const addYTSearchResult = async function(item) {
                     if((temparray[k][k+1]) != true){
                         console.log(feedContent);
                         for(let n = 0; n < feedContent.length; n++){
+                            if(YTUserName == name){
+                                console.log(YTUserName);
+                                feedContent[n].DOMElement.style.display = "none";
+                            }
+                            
+                        }
+                    }else{
+                        for(let n = 0; n < feedContent.length; n++){
                             console.log(YTUserName);
-                            feedContent[n].DOMElement.style.visibility = "none";
+                            feedContent[n].DOMElement.style.display = "block";
                         }
                     }
                 }
@@ -379,14 +387,20 @@ window.addEventListener("scroll", () => {
     }
 });
 
-function scrollToTop() {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-}
-
 function loadSettings() {
-
+    let sFeeds = JSON.parse(localStorage.getItem("feeds"));
+    console.log("sfeeds ", sFeeds);
+    console.log("feeds pre ", feeds);
+    feeds = sFeeds === null ? [] : sFeeds;
+    console.log("feeds post ", feeds);
 }
+
+window.onunload = function() {
+    for(let item of feeds) {
+        item.minimumTweet = {id: Infinity};
+    }
+    localStorage.setItem("feeds", JSON.stringify(feeds));
+};
 
 loadSettings();
 updateFeed();

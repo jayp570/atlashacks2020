@@ -11,6 +11,8 @@ x.name = "name";
 x.value = "value";
 
 
+let showingTwitter = true;
+let showingYoutube = true;
 
 if(ytbers.length == 0) {
     document.getElementById("emptyMessage").innerHTML = "You have no creators in your feed!"
