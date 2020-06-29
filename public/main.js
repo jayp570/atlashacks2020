@@ -90,6 +90,8 @@ const addYTSearchResult = async function(item) {
 
         submitbutton.onclick = function() {
 
+            console.log("filterz");
+
             for(let k = 1; k <= ytbers.length; k++){
                 let stringid = ("id"+k).toString();
                 if(document.getElementById(stringid).checked == true){
@@ -133,6 +135,7 @@ const addYTSearchResult = async function(item) {
             } else {    
                 showingYoutube = false
             }
+
             updateFeed();
             
         }
@@ -401,6 +404,7 @@ function loadSettings() {
 window.onunload = function() {
     for(let item of feeds) {
         item.minimumTweet = {id: Infinity};
+        printchecklist(item.youtuberName, item.youtubeId);
     }
     localStorage.setItem("feeds", JSON.stringify(feeds));
 };
