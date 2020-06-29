@@ -106,7 +106,7 @@ const addYTSearchResult = async function(item) {
                     if((temparray[k][k+1]) != true){
                         console.log(feedContent);
                         for(let n = 0; n < feedContent.length; n++){
-                            if(YTUserName == name){
+                            if(YTUserName == feedContent[n].youtuberName){
                                 console.log(YTUserName);
                                 feedContent[n].DOMElement.style.display = "none";
                             }
