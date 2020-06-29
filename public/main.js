@@ -23,6 +23,9 @@ const SECONDS_PER_DAY = SECONDS_PER_HOUR * 24;
 const SECONDS_PER_MONTH = SECONDS_PER_DAY * 30.5;
 const SECONDS_PER_YEAR = SECONDS_PER_MONTH * 12;
 
+let showingTwitter = true;
+let showingYoutube = true;
+
 console.log(final_passed_array)
 
 const monthToNum = {
@@ -114,6 +117,19 @@ const addYTSearchResult = async function(item) {
             }
             // console.log(checkboxid);
             // console.log(ytbers);
+
+            if(document.getElementById("twtbtn").checked == true) {
+                showingTwitter = false;
+            } else {    
+                showingTwitter = false
+            }
+
+            if(document.getElementById("ytbtn").checked == true) {
+                showingYoutube = false;
+            } else {    
+                showingYoutube = false
+            }
+            updateFeed();
             
         }
 
@@ -334,12 +350,12 @@ const updateFeed = async function() {
         for(let item of feedContent) {
             if(showingTwitter == false) {
                 if(item.type == "twitter") {
-                    item.DOMElement.visibility = "hidden";
+                    item.DOMElement.style.display = "none";
                 }
             }
             if(showingYoutube == false) {
                 if(item.type == "youtube") {
-                    item.DOMElement.visibility = "hidden";
+                    item.DOMElement.style.display = "none";
                 }
             }
         }
