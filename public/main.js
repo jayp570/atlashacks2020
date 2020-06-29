@@ -220,6 +220,7 @@ const insertIntoFeed = function(newItem) {
         if(newItem.timestamp > item.timestamp) {
 
             // Use splice to insert new item at i
+            if(newItem.type == "twitter") console.log("-- SPLICE ", newItem.tweet.id);
             feedContent.splice(i, 0, newItem);
             return;
 
@@ -317,13 +318,29 @@ const updateFeed = async function() {
         
         loading = true;
 
+
         for(let channel of feeds) {
             await getYoutubeContent(channel);
         }
+        
+
 
         for(let channel of feeds) {
             if(channel.hasTwitter) {
                 await getTwitterContent(channel);
+            }
+        }
+
+        for(let item of feedContent) {
+            if(showingTwitter == false) {
+                if(item.type == "twitter") {
+                    item.DOMElement.visibility = "hidden";
+                }
+            }
+            if(showingYoutube == false) {
+                if(item.type == "youtube") {
+                    item.DOMElement.visibility = "hidden";
+                }
             }
         }
 

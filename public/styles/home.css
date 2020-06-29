@@ -110,6 +110,14 @@ html {
     padding: 20px;
 }
 
+.feedFilter::-webkit-scrollbar {
+    display: none;
+}
+
+.addCreator::-webkit-scrollbar {
+    display: none;
+}
+
 
 .csscard{
     width: 960px;
@@ -177,7 +185,7 @@ input[type='checkbox'] {
     font-size: 14px;
     padding: 20px;
     color: white;
-    background-color: black;
+    background-color: rgb(10, 10, 10);
     margin-top: 40px;
     width: 100%;
     display: block;

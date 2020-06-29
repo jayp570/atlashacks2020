@@ -10,6 +10,9 @@ x.type = "checkbox";
 x.name = "name";
 x.value = "value";
 
+let showingTwitter = true;
+let showingYoutube = true;
+
 if(ytbers.length == 0) {
     document.getElementById("emptyMessage").innerHTML = "You have no creators in your feed!"
 } else {
@@ -69,4 +72,6 @@ function showtoast() {
     t.className = "show";
     setTimeout(function(){ t.className = t.className.replace("show", ""); }, 3000);
   }
+
+
   
