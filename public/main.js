@@ -115,8 +115,6 @@ const addYTSearchResult = async function(item) {
                     }
                 }
             }
-            // console.log(checkboxid);
-            // console.log(ytbers);
 
             if(document.getElementById("twtbtn").checked == true) {
                 showingTwitter = true;
@@ -386,4 +384,9 @@ function scrollToTop() {
     document.documentElement.scrollTop = 0;
 }
 
+function loadSettings() {
+
+}
+
+loadSettings();
 updateFeed();
