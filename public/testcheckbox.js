@@ -50,19 +50,19 @@ function printchecklist(ytber_name, ytber_id){
     }
 }
 
-submitbutton.onclick = function(){
-    for(let k = 1; k <= ytbers.length; k++){
-        let stringid = ("id"+k).toString();
-        if(document.getElementById(stringid).checked == true){
-            final_passed_array[k-1,k-1] = [[ytbers[k-1],true]]
-        }else{
-            final_passed_array[k-1,k-1] = [[ytbers[k-1],false]]
-        }
-    }
-    console.log(checkboxid);
-    console.log(ytbers);
-    console.log(final_passed_array);
-}
+// submitbutton.onclick = function(){
+//     for(let k = 1; k <= ytbers.length; k++){
+//         let stringid = ("id"+k).toString();
+//         if(document.getElementById(stringid).checked == true){
+//             final_passed_array[k-1,k-1] = [[ytbers[k-1],true]]
+//         }else{
+//             final_passed_array[k-1,k-1] = [[ytbers[k-1],false]]
+//         }
+//     }
+//     console.log(checkboxid);
+//     console.log(ytbers);
+    
+// }
 
 function showtoast() {
     var t = document.getElementById("toast");

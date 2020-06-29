@@ -40,10 +40,6 @@ const monthToNum = {
 	"Dec": 11
 };
 
-let youtubernames = function() {
-    
-}
-
 // Generate a clickable YT search result by youtuber
 const addYTSearchResult = async function(item) {
 
@@ -83,6 +79,7 @@ const addYTSearchResult = async function(item) {
             }
         }
 
+
         feeds.push({
             youtuberName: item.snippet.channelTitle,
             youtubeId: item.id.channelId,
@@ -90,6 +87,35 @@ const addYTSearchResult = async function(item) {
             hasTwitter: hasTwitter,
             minimumTweet: {id: Infinity}
         });
+
+        submitbutton.onclick = function(){
+            for(let k = 1; k <= ytbers.length; k++){
+                let stringid = ("id"+k).toString();
+                if(document.getElementById(stringid).checked == true){
+                    final_passed_array[k-1,k-1] = [[ytbers[k-1],true]]
+                }else{
+                    final_passed_array[k-1,k-1] = [[ytbers[k-1],false]]
+                }
+            }
+
+            console.log(final_passed_array);
+            for(let j = 0; j < final_passed_array.length; j++){
+                let temparray = final_passed_array[j];
+                for(let k = 0; k < temparray.length; k++){
+                    let YTUserName = temparray[k][k];
+                    if((temparray[k][k+1]) != true){
+                        console.log(feedContent);
+                        for(let n = 0; n < feedContent.length; n++){
+                            console.log(YTUserName);
+                            feedContent[n].DOMElement.visibility = "hidden";
+                        }
+                    }
+                }
+            }
+            // console.log(checkboxid);
+            // console.log(ytbers);
+            
+        }
 
         updateFeed();
 
