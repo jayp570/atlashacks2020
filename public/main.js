@@ -88,7 +88,8 @@ const addYTSearchResult = async function(item) {
             minimumTweet: {id: Infinity}
         });
 
-        submitbutton.onclick = function(){
+        submitbutton.onclick = function() {
+
             for(let k = 1; k <= ytbers.length; k++){
                 let stringid = ("id"+k).toString();
                 if(document.getElementById(stringid).checked == true){
