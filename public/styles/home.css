@@ -1,6 +1,6 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #333;
+    background-color: #222;
     margin: 0;
     color: white;
     line-height: 20px;
@@ -93,7 +93,7 @@ html {
     z-index: 10; /* Stay on top */
     top: 0; /* Stay at the top */
     left: 0;
-    background-color: #222; /* Black */
+    background-color: #111; /* Black */
     overflow-x: hidden; /* Disable horizontal scroll */
     padding: 20px;
 }
@@ -105,7 +105,7 @@ html {
     z-index: 10; /* Stay on top */
     top: 0; /* Stay at the top */
     right: 0;
-    background-color: #222; /* Black */
+    background-color: #111; /* Black */
     overflow-x: hidden; /* Disable horizontal scroll */
     padding: 20px;
 }
@@ -176,8 +176,8 @@ input[type='checkbox'] {
 .about {
     font-size: 14px;
     padding: 20px;
-    color: #111;
-    background-color: white;
+    color: white;
+    background-color: black;
     margin-top: 40px;
     width: 100%;
     display: block;
@@ -242,4 +242,11 @@ input[type='checkbox'] {
 .emptyMessage{
     font-size: 16px;
     margin-left: 12px;
+}
+a {
+    color: cyan;
+}
+
+a:visited {
+    color: cyan;
 }
