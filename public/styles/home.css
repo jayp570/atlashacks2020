@@ -3,6 +3,7 @@ body {
     background-color: #333;
     margin: 0;
     color: white;
+    line-height: 20px;
 }
 
 body::-webkit-scrollbar {
@@ -236,4 +237,9 @@ input[type='checkbox'] {
 @keyframes fadeout{
     from {bottom: 30px; opacity: 1;}
     to {bottom: 0; opacity: 0;}
+}
+
+.emptyMessage{
+    font-size: 16px;
+    margin-left: 12px;
 }
