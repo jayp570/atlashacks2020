@@ -23,9 +23,6 @@ const SECONDS_PER_DAY = SECONDS_PER_HOUR * 24;
 const SECONDS_PER_MONTH = SECONDS_PER_DAY * 30.5;
 const SECONDS_PER_YEAR = SECONDS_PER_MONTH * 12;
 
-let showingTwitter = true;
-let showingYoutube = true;
-
 console.log(final_passed_array)
 
 const monthToNum = {
@@ -54,7 +51,7 @@ const addYTSearchResult = async function(item) {
 
     // Add channel name
     let channelNameElem = document.createElement("p");
-    channelNameElem.appendChild(document.createTextNode(`${item.snippet.channelTitle} (id <code>${item.id.channelId}</code>)`));
+    channelNameElem.appendChild(document.createTextNode(`${item.snippet.channelTitle}`));
     subDiv.appendChild(channelNameElem);
 
     // Add channel thumbnail
