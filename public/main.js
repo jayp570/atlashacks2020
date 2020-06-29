@@ -380,11 +380,18 @@ window.addEventListener("scroll", () => {
 });
 
 function loadSettings() {
-
+    let sFeeds = JSON.parse(localStorage.getItem("feeds"));
+    console.log("sfeeds ", sFeeds);
+    console.log("feeds pre ", feeds);
+    feeds = sFeeds === null ? [] : sFeeds;
+    console.log("feeds post ", feeds);
 }
 
 window.onunload = function() {
-    
+    for(let item of feeds) {
+        item.minimumTweet = {id: Infinity};
+    }
+    localStorage.setItem("feeds", JSON.stringify(feeds));
 };
 
 loadSettings();
