@@ -18,7 +18,7 @@
   "homepage": "https://github.com/jayp-png/atlashacks2020#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^2.6.7",
     "request": "^2.88.2",
     "twitter": "^1.7.1"
   }
